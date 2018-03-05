@@ -9,11 +9,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="note-copy">
+<dom-module id="note-history">
   <template>
     <style include="shared-styles">
       :host {
@@ -24,16 +22,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
-      <paper-textarea rows=20 always-float-label label="Notes"></paper-textarea>
-      <paper-button raised>Copy</paper-button>
+
+    </div>
+    <div class="card">
+
+    </div>
+    <div class="card">
+
     </div>
   </template>
 
   <script>
-    class NoteCopy extends Polymer.Element {
-      static get is() { return 'note-copy'; }
+    class NoteHistory extends Polymer.Element {
+      static get is() { return 'note-history'; }
     }
 
-    window.customElements.define(NoteCopy.is, NoteCopy);
+    window.customElements.define(NoteHistory.is, NoteHistory);
   </script>
 </dom-module>

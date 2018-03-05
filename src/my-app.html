@@ -85,9 +85,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="note-gen" href="[[rootPath]]note-gen">View One</a>
-          <a name="note-copy" href="[[rootPath]]note-copy">View Two</a>
-          <a name="link-finder" href="[[rootPath]]link-finder">View Three</a>
+          <a name="note-gen" href="[[rootPath]]note-gen">Generator</a>
+          <a name="note-copy" href="[[rootPath]]note-copy">Copying</a>
+          <a name="link-finder" href="[[rootPath]]link-finder">Link Creator</a>
+          <a name="note-history" href="[[rootPath]]note-history">History</a>
         </iron-selector>
       </app-drawer>
 
@@ -97,7 +98,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>OST Note Creator</div>
           </app-toolbar>
         </app-header>
 
@@ -109,6 +110,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <note-gen name="note-gen"></note-gen>
           <note-copy name="note-copy"></note-copy>
           <link-finder name="link-finder"></link-finder>
+          <note-history name="note-history"></note-history>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>

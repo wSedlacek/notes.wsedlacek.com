@@ -8,7 +8,14 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<link rel="import" href="../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="note-gen">
@@ -22,10 +29,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
-      <div class="circle">1</div>
-      <h1>View One</h1>
-      <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-      <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <paper-dropdown-menu label="ISP">
+        <paper-listbox slot="dropdown-content" selected="5">
+          <paper-item>CenturyLink</paper-item>
+          <paper-item>Rise</paper-item>
+          <paper-item>Retail</paper-item>
+          <paper-item>Texas.gov</paper-item>
+          <paper-item>DPS Direct</paper-item>
+          <paper-item>Unknown</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <paper-input always-float-label label="Name of Caller"></paper-input>
+      <paper-input always-float-label label="Name on the Account"></paper-input>
+      <paper-input always-float-label label="Billing Telephone Number"></paper-input>
+      <paper-input always-float-label label="Callback Number"></paper-input>
+      <paper-input always-float-label label="Support Level"></paper-input>
+      <paper-input always-float-label label="Verification Method"></paper-input>
+      <paper-input always-float-label label="RX Number"></paper-input>
+      <paper-input always-float-label label="Order Number"></paper-input>
+      <paper-input always-float-label label="LMIR Code"></paper-input>
+      <paper-input always-float-label label="VTR Code"></paper-input>
+      <paper-textarea rows=4 always-float-label label="Computer Info"></paper-textarea>
+      <paper-textarea rows=4 always-float-label label="Issue"></paper-textarea>
+      <paper-textarea rows=4 always-float-label label="Troubleshooting"></paper-textarea>
     </div>
   </template>
 
