@@ -29,8 +29,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <div class="card">
-      <paper-dropdown-menu label="ISP">
-        <paper-listbox slot="dropdown-content" selected="5">
+      <paper-dropdown-menu always-float-label label="ISP">
+        <paper-listbox slot="dropdown-content" selected={{notes.isp}}>
           <paper-item>CenturyLink</paper-item>
           <paper-item>Rise</paper-item>
           <paper-item>Retail</paper-item>
@@ -39,25 +39,57 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-item>Unknown</paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
-      <paper-input always-float-label label="Name of Caller"></paper-input>
-      <paper-input always-float-label label="Name on the Account"></paper-input>
-      <paper-input always-float-label label="Billing Telephone Number"></paper-input>
-      <paper-input always-float-label label="Callback Number"></paper-input>
-      <paper-input always-float-label label="Support Level"></paper-input>
-      <paper-input always-float-label label="Verification Method"></paper-input>
-      <paper-input always-float-label label="RX Number"></paper-input>
-      <paper-input always-float-label label="Order Number"></paper-input>
-      <paper-input always-float-label label="LMIR Code"></paper-input>
-      <paper-input always-float-label label="VTR Code"></paper-input>
-      <paper-textarea rows=4 always-float-label label="Computer Info"></paper-textarea>
-      <paper-textarea rows=4 always-float-label label="Issue"></paper-textarea>
-      <paper-textarea rows=4 always-float-label label="Troubleshooting"></paper-textarea>
+      <paper-input always-float-label label="Name of Caller" value="{{notes.noc}}"></paper-input>
+      <paper-input always-float-label label="Name on the Account" value="{{notes.noa}}"></paper-input>
+      <paper-input always-float-label label="Billing Telephone Number" value="{{notes.btn}}"></paper-input>
+      <paper-input always-float-label label="Callback Number" value="{{notes.cbn}}"></paper-input>
+      <paper-input always-float-label label="Support Level" value="{{notes.msp}}"></paper-input>
+      <paper-input always-float-label label="Verification Method" value="{{notes.ver}}"></paper-input>
+      <paper-input always-float-label label="RX Number" value="{{notes.rx}}"></paper-input>
+      <paper-input always-float-label label="Order Number" value="{{notes.order}}"></paper-input>
+      <paper-input always-float-label label="LMIR Code" value="{{notes.lmir}}"></paper-input>
+      <paper-input always-float-label label="VTR Code" value="{{notes.vtr}}"></paper-input>
+      <paper-textarea rows=4 always-float-label label="Computer Info" value="{{notes.info}}"></paper-textarea>
+      <paper-textarea rows=4 always-float-label label="Issue" value="{{notes.issue}}"></paper-textarea>
+      <paper-textarea rows=4 always-float-label label="Troubleshooting" value="{{notes.ts}}"></paper-textarea>
+      <paper-textarea rows=4 always-float-label label="Todo" value="{{notes.todo}}"></paper-textarea>
+      <paper-textarea rows=2 always-float-label label="Resolution" value="{{notes.res}}"></paper-textarea>
     </div>
   </template>
 
   <script>
     class NoteGen extends Polymer.Element {
       static get is() { return 'note-gen'; }
+
+      static get properties() {
+        return {
+          notes: {
+            type: Object,
+            value: function() {
+              return {
+                isp: 5,
+                noc: "",
+                noa: "",
+                btn: "",
+                cbn: "",
+                ban: "",
+                msp: "",
+                ver: "",
+                rx: "",
+                order: "",
+                pts: "",
+                lmir: "",
+                vtr: "",
+                info: "",
+                issue: "",
+                ts: "",
+                todo: "",
+                res: ""
+              };
+            }
+          }
+        };
+      }
     }
 
     window.customElements.define(NoteGen.is, NoteGen);
