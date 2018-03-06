@@ -10,6 +10,7 @@
         flex: var(--layout-flex_-_flex);
         width: 90vw;
       }
+
       div {
         padding: 0;
         margin: 0;
@@ -21,26 +22,26 @@
 
   <script>
     class ActionBar extends Polymer.Element {
-      static get is() { return 'action-bar'; }
+      static get is() {
+        return 'action-bar';
+      }
       static get properties() {
         return {
           menuItems: {
             type: Array,
-            value: function(){
-              return [
-                {
-                  name: 'Save',
-                  icon: 'save',
-                  onclick: this._save,
-                  beforeName: false,
-                  overflowPiority: 1
-                }
-              ];
+            value: function () {
+              return [{
+                name: 'Save',
+                icon: 'save',
+                onclick: this._save,
+                beforeName: false,
+                overflowPiority: 1
+              }];
             }
           },
           title: {
             type: String,
-            value: 'Untitled',
+            value: 'Unknown',
             observer: '_populateActionMenu'
           }
         };
@@ -48,8 +49,13 @@
 
       ready(reference = this) {
         super.ready();
-        var oldresize = window.onresize ? window.onresize.bind(this): function(){return;};
-        window.onresize = function() { oldresize(); reference._populateActionMenu(null, null, reference);};
+        var oldresize = window.onresize ? window.onresize.bind(this) : function () {
+          return;
+        };
+        window.onresize = function () {
+          oldresize();
+          reference._populateActionMenu(null, null, reference);
+        };
         document.addEventListener('update-title', e => this.updateTitle(e.detail.title));
       }
 
@@ -60,24 +66,26 @@
           this.$.actionMenu.removeChild(this.$.actionMenu.lastChild);
         }
 
-        var width = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
+        var width = window.innerWidth ||
+          document.documentElement.clientWidth ||
+          document.body.clientWidth;
         var overflow = 0;
         while (width < 920) {
-          width+=180;
+          width += 180;
           overflow++;
         }
 
         var isbeforeTitle = true;
         var overlowMenu = [];
         var buttonContainer = this.$.actionMenu;
-        this.menuItems.forEach(function(item) {
+        this.menuItems.forEach(function (item) {
           if (!item.beforeTitle && isbeforeTitle) {
             var title = document.createElement('div');
             title.setAttribute('main-title', '');
             var num = (this.menuItems.length * 40) - (50 * overflow);
-            title.style = 'display: inline-block; height: 40px; line-height: 40px; vertical-align: middle; width: calc(100% - '+num+'px); overflow: hidden; text-overflow: ellipsis;';
+            title.style =
+              'display: inline-block; height: 40px; line-height: 40px; vertical-align: middle; width: calc(100% - ' +
+              num + 'px); overflow: hidden; text-overflow: ellipsis;';
             title.innerHTML = this.title;
             this.$.actionMenu.appendChild(title);
             buttonContainer = document.createElement('div');
@@ -86,9 +94,11 @@
             isbeforeTitle = false;
           }
           if (item.overflowPiority > overflow) {
-            var menuItem     = document.createElement('paper-icon-button');
-            menuItem.icon    = item.icon;
-            menuItem.onclick = function(){item.onclick(reference);}
+            var menuItem = document.createElement('paper-icon-button');
+            menuItem.icon = item.icon;
+            menuItem.onclick = function () {
+              item.onclick(reference);
+            }
             buttonContainer.appendChild(menuItem);
           } else {
             overlowMenu.push(item);
@@ -96,24 +106,29 @@
         }, this);
 
         if (overlowMenu[0] != null) {
-          var overflowMenuContainer    = document.createElement('paper-menu-button');
-          var overflowMenuButton       = document.createElement('paper-icon-button');
-          var overflowMenuList         = document.createElement('div');
-          overflowMenuContainer.style  = 'padding: 0;'
-          overflowMenuButton.icon      = 'more-vert';
-          overflowMenuButton.slot      = 'dropdown-trigger';
-          overflowMenuButton.alt       = 'menu align';
-          overflowMenuList.slot        = 'dropdown-content';
-          overflowMenuList.style       = 'position: fixed; top: 13px; right: 16px; box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); border-radius: 3px; background-color: #fff;';
+          var overflowMenuContainer = document.createElement('paper-menu-button');
+          var overflowMenuButton = document.createElement('paper-icon-button');
+          var overflowMenuList = document.createElement('div');
+          overflowMenuContainer.style = 'padding: 0;'
+          overflowMenuButton.icon = 'more-vert';
+          overflowMenuButton.slot = 'dropdown-trigger';
+          overflowMenuButton.alt = 'menu align';
+          overflowMenuList.slot = 'dropdown-content';
+          overflowMenuList.style =
+            'position: fixed; top: 13px; right: 16px; box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2); border-radius: 3px; background-color: #fff;';
           overflowMenuContainer.setAttribute('horizontal-align', 'right');
           overflowMenuContainer.setAttribute('vertical-align', 'bottom');
-          overlowMenu.forEach(function(item) {
-            var menuItem       = document.createElement('paper-button');
-            var menuItemIcon   = document.createElement('iron-icon');
+          overlowMenu.forEach(function (item) {
+            var menuItem = document.createElement('paper-button');
+            var menuItemIcon = document.createElement('iron-icon');
             menuItem.innerHTML = item.name + " ";
-            menuItemIcon.icon  = item.icon;
-            menuItem.onclick   = function(){item.onclick(reference); overflowMenuContainer.close();}
-            menuItem.style     = "display: block; text-align: right; color: #000; font-size: 14px; font-weight: normal; margin: 0;"
+            menuItemIcon.icon = item.icon;
+            menuItem.onclick = function () {
+              item.onclick(reference);
+              overflowMenuContainer.close();
+            }
+            menuItem.style =
+              "display: block; text-align: right; color: #000; font-size: 14px; font-weight: normal; margin: 0;"
             menuItem.appendChild(menuItemIcon);
             overflowMenuList.appendChild(menuItem);
           }, this);
@@ -124,7 +139,11 @@
       }
 
       _showRenameDeck(refenece = this) {
-        document.dispatchEvent(new CustomEvent('show-rename-deck', {detail: {deckname: refenece.deckname}}));
+        document.dispatchEvent(new CustomEvent('show-rename-deck', {
+          detail: {
+            deckname: refenece.deckname
+          }
+        }));
       }
 
       updateTitle(title) {

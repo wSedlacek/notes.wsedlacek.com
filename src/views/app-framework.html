@@ -12,8 +12,8 @@
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
-<link rel="import"      href="note-gen.html">
-<link rel="import"      href="note-copy.html">
+<link rel="import" href="note-gen.html">
+<link rel="import" href="note-copy.html">
 <link rel="lazy-import" href="note-link.html">
 <link rel="lazy-import" href="note-finder.html">
 <link rel="lazy-import" href="note-history.html">
@@ -62,16 +62,10 @@
       }
     </style>
 
-    <app-location
-        route="{{route}}"
-        url-space-regex="^[[rootPath]]">
+    <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
     </app-location>
 
-    <app-route
-        route="{{route}}"
-        pattern="[[rootPath]]:page"
-        data="{{routeData}}"
-        tail="{{subroute}}">
+    <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
     </app-route>
 
     <app-drawer-layout fullbleed narrow="{{narrow}}">
@@ -96,11 +90,7 @@
           </app-toolbar>
         </app-header>
 
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="error-404"
-            role="main">
+        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="error-404" role="main">
           <note-gen id="gen" name="note-gen"></note-gen>
           <note-copy id="copy" name="note-copy"></note-copy>
           <note-link name="note-link"></note-link>
@@ -117,7 +107,9 @@
     Polymer.setPassiveTouchGestures(true);
 
     class AppFramework extends Polymer.Element {
-      static get is() { return 'app-framework'; }
+      static get is() {
+        return 'app-framework';
+      }
 
       ready() {
         super.ready();
@@ -160,10 +152,10 @@
         // Load page import on demand. Show 404 page if fails
         const resolvedPageUrl = this.resolveUrl(page + '.html');
         Polymer.importHref(
-            resolvedPageUrl,
-            null,
-            this._showPage404.bind(this),
-            true);
+          resolvedPageUrl,
+          null,
+          this._showPage404.bind(this),
+          true);
       }
 
       _showPage404() {

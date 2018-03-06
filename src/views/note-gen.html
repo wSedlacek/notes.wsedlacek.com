@@ -45,30 +45,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
     <div class="card">
       <div id="fields">
-      <paper-input id="noc" always-float-label label="Name of Caller" value="{{notes.noc}}"></paper-input>
-      <paper-input id="noa" always-float-label label="Name on the Account" value="{{notes.noa}}"></paper-input>
-      <paper-input id="btn" always-float-label label="Billing Telephone Number" value="{{notes.btn}}"></paper-input>
-      <paper-input id="cbn" always-float-label label="Callback Number" value="{{notes.cbn}}"></paper-input>
-      <paper-input id="msp" always-float-label label="Support Level" value="{{notes.msp}}"></paper-input>
-      <paper-input id="ver" always-float-label label="Verification Method" value="{{notes.ver}}"></paper-input>
-      <paper-input id="rx" always-float-label label="RX Number" value="{{notes.rx}}"></paper-input>
-      <paper-input id="order" always-float-label label="Order Number" value="{{notes.order}}"></paper-input>
-      <paper-input id="lmir" always-float-label label="LMIR Code" value="{{notes.lmir}}"></paper-input>
-      <paper-input id="vtr" always-float-label label="VTR Code" value="{{notes.vtr}}"></paper-input>
-      <paper-textarea id="info" rows=4 always-float-label label="Computer Info" value="{{notes.info}}"></paper-textarea>
-      <paper-textarea id="issue" rows=4 always-float-label label="Issue" value="{{notes.issue}}"></paper-textarea>
-      <paper-textarea id="ts" rows=4 always-float-label label="Troubleshooting" value="{{notes.ts}}"></paper-textarea>
-      <paper-textarea id="todo" rows=4 always-float-label label="Todo" value="{{notes.todo}}"></paper-textarea>
-      <paper-textarea id="res" rows=2 always-float-label label="Resolution" value="{{notes.res}}"></paper-textarea>
+        <paper-input id="noc" always-float-label label="Name of Caller" value="{{notes.noc}}"></paper-input>
+        <paper-input id="noa" always-float-label label="Name on the Account" value="{{notes.noa}}"></paper-input>
+        <paper-input id="btn" always-float-label label="Billing Telephone Number" value="{{notes.btn}}"></paper-input>
+        <paper-input id="cbn" always-float-label label="Callback Number" value="{{notes.cbn}}"></paper-input>
+        <paper-input id="msp" always-float-label label="Support Level" value="{{notes.msp}}"></paper-input>
+        <paper-input id="ver" always-float-label label="Verification Method" value="{{notes.ver}}"></paper-input>
+        <paper-input id="rx" always-float-label label="RX Number" value="{{notes.rx}}"></paper-input>
+        <paper-input id="order" always-float-label label="Order Number" value="{{notes.order}}"></paper-input>
+        <paper-input id="lmir" always-float-label label="LMIR Code" value="{{notes.lmir}}"></paper-input>
+        <paper-input id="vtr" always-float-label label="VTR Code" value="{{notes.vtr}}"></paper-input>
+        <paper-textarea id="info" rows=4 always-float-label label="Computer Info" value="{{notes.info}}"></paper-textarea>
+        <paper-textarea id="issue" rows=4 always-float-label label="Issue" value="{{notes.issue}}"></paper-textarea>
+        <paper-textarea id="ts" rows=4 always-float-label label="Troubleshooting" value="{{notes.ts}}"></paper-textarea>
+        <paper-textarea id="todo" rows=4 always-float-label label="Todo" value="{{notes.todo}}"></paper-textarea>
+        <paper-textarea id="res" rows=2 always-float-label label="Resolution" value="{{notes.res}}"></paper-textarea>
       </div>
     </div>
   </template>
 
   <script>
     class NoteGen extends Polymer.Element {
-      static get is() { return 'note-gen'; }
+      static get is() {
+        return 'note-gen';
+      }
 
-      ready(){
+      ready() {
         super.ready();
         this.changeGreeting();
       }
@@ -82,7 +84,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           isps: {
             type: Object,
-            value: function() {
+            value: function () {
               return {
                 cl: 0,
                 rise: 1,
@@ -96,7 +98,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           greeting: String,
           greetings: {
             type: Object,
-            value: function() {
+            value: function () {
               return {
                 cl: "",
                 rise: "",
@@ -109,7 +111,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           notes: {
             type: Object,
-            value: function() {
+            value: function () {
               return {
                 isp: 5,
                 noc: "",
@@ -137,7 +139,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       enableAllFields() {
         var fields = [].slice.call(this.$.fields.children);
-        fields.forEach(function(itemToEnable) {
+        fields.forEach(function (itemToEnable) {
           itemToEnable.setAttribute('style', '');
         });
       }
@@ -145,14 +147,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       disableUnrelatedFields() {
         var listToDisable = [];
         switch (this.isp) {
-          case this.isps.cl: break;
-          case this.isps.rise: listToDisable.push(this.$.rx, this.$.ver, this.$.vtr); break;
-          case this.isps.retail: listToDisable.push(this.$.rx, this.$.ver, this.$.vtr); break;
-          case this.isps.txo: listToDisable.push(this.$.noa, this.$.rx, this.$.ver, this.$.vtr, this.$.lmir, this.$.info, this.$.msp); break;
-          case this.isps.dps: listToDisable.push(this.$.noa, this.$.rx, this.$.ver, this.$.vtr, this.$.lmir, this.$.info, this.$.msp); break;
+          case this.isps.cl:
+            break;
+          case this.isps.rise:
+            listToDisable.push(this.$.rx, this.$.ver, this.$.vtr);
+            break;
+          case this.isps.retail:
+            listToDisable.push(this.$.rx, this.$.ver, this.$.vtr);
+            break;
+          case this.isps.txo:
+            listToDisable.push(this.$.noa, this.$.rx, this.$.ver, this.$.vtr, this.$.lmir, this.$.info, this.$.msp);
+            break;
+          case this.isps.dps:
+            listToDisable.push(this.$.noa, this.$.rx, this.$.ver, this.$.vtr, this.$.lmir, this.$.info, this.$.msp);
+            break;
         }
 
-        listToDisable.forEach(function(itemToDisable) {
+        listToDisable.forEach(function (itemToDisable) {
           itemToDisable.value = "";
           itemToDisable.setAttribute('style', 'display: none');
         });
@@ -160,12 +171,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       changeGreeting() {
         switch (this.isp) {
-          case this.isps.cl: this.greeting = this.greetings.cl; break;
-          case this.isps.rise: this.greeting = this.greetings.rise; break;
-          case this.isps.retail: this.greeting = this.greetings.retail; break;
-          case this.isps.txo: this.greeting = this.greetings.txo; break;
-          case this.isps.dps: this.greeting = this.greetings.dps; break;
-          case this.isps.unknown: this.greeting = this.greetings.unknown; break;
+          case this.isps.cl:
+            this.greeting = this.greetings.cl;
+            break;
+          case this.isps.rise:
+            this.greeting = this.greetings.rise;
+            break;
+          case this.isps.retail:
+            this.greeting = this.greetings.retail;
+            break;
+          case this.isps.txo:
+            this.greeting = this.greetings.txo;
+            break;
+          case this.isps.dps:
+            this.greeting = this.greetings.dps;
+            break;
+          case this.isps.unknown:
+            this.greeting = this.greetings.unknown;
+            break;
         }
       }
 
