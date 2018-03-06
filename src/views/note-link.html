@@ -8,10 +8,10 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="shared-styles.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../shared/styles.html">
 
-<dom-module id="link-finder">
+<dom-module id="note-link">
   <template>
     <style include="shared-styles">
       :host {
@@ -33,10 +33,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class LinkFinder extends Polymer.Element {
-      static get is() { return 'link-finder'; }
+    class NoteLink extends Polymer.Element {
+      static get is() { return 'note-link'; }
     }
 
-    window.customElements.define(LinkFinder.is, LinkFinder);
+    window.customElements.define(NoteLink.is, NoteLink);
   </script>
 </dom-module>

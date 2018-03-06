@@ -1,0 +1,22 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="backend-isp">
+  <template>
+  </template>
+
+  <script>
+    class BackendIsp extends Polymer.Element {
+      static get is() { return 'backend-isp'; }
+      static get properties() {
+        return {
+          name: String,
+          greenting: String,
+          fields: Array,
+          color: Object
+        };
+      }
+    }
+
+    window.customElements.define(BackendIsp.is, BackendIsp);
+  </script>
+</dom-module>

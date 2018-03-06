@@ -1,0 +1,182 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../shared/styles.html">
+
+<dom-module id="note-gen">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+
+    <div class="card" style="display: inline-block">
+      <paper-dropdown-menu always-float-label label="ISP">
+        <paper-listbox slot="dropdown-content" selected={{isp}}>
+          <paper-item>CenturyLink</paper-item>
+          <paper-item>Rise</paper-item>
+          <paper-item>Retail</paper-item>
+          <paper-item>Texas.gov</paper-item>
+          <paper-item>DPS Direct</paper-item>
+          <paper-item>Unknown</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+    </div>
+    <div class="card" style="display: inline-block">
+      <p id="greeting">{{greeting}}</p>
+    </div>
+    <div class="card">
+      <div id="fields">
+      <paper-input id="noc" always-float-label label="Name of Caller" value="{{notes.noc}}"></paper-input>
+      <paper-input id="noa" always-float-label label="Name on the Account" value="{{notes.noa}}"></paper-input>
+      <paper-input id="btn" always-float-label label="Billing Telephone Number" value="{{notes.btn}}"></paper-input>
+      <paper-input id="cbn" always-float-label label="Callback Number" value="{{notes.cbn}}"></paper-input>
+      <paper-input id="msp" always-float-label label="Support Level" value="{{notes.msp}}"></paper-input>
+      <paper-input id="ver" always-float-label label="Verification Method" value="{{notes.ver}}"></paper-input>
+      <paper-input id="rx" always-float-label label="RX Number" value="{{notes.rx}}"></paper-input>
+      <paper-input id="order" always-float-label label="Order Number" value="{{notes.order}}"></paper-input>
+      <paper-input id="lmir" always-float-label label="LMIR Code" value="{{notes.lmir}}"></paper-input>
+      <paper-input id="vtr" always-float-label label="VTR Code" value="{{notes.vtr}}"></paper-input>
+      <paper-textarea id="info" rows=4 always-float-label label="Computer Info" value="{{notes.info}}"></paper-textarea>
+      <paper-textarea id="issue" rows=4 always-float-label label="Issue" value="{{notes.issue}}"></paper-textarea>
+      <paper-textarea id="ts" rows=4 always-float-label label="Troubleshooting" value="{{notes.ts}}"></paper-textarea>
+      <paper-textarea id="todo" rows=4 always-float-label label="Todo" value="{{notes.todo}}"></paper-textarea>
+      <paper-textarea id="res" rows=2 always-float-label label="Resolution" value="{{notes.res}}"></paper-textarea>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class NoteGen extends Polymer.Element {
+      static get is() { return 'note-gen'; }
+
+      ready(){
+        super.ready();
+        this.changeGreeting();
+      }
+
+      static get properties() {
+        return {
+          isp: {
+            type: Number,
+            value: 5,
+            observer: "changeISP"
+          },
+          isps: {
+            type: Object,
+            value: function() {
+              return {
+                cl: 0,
+                rise: 1,
+                retail: 2,
+                txo: 3,
+                dps: 4,
+                unknown: 5
+              }
+            }
+          },
+          greeting: String,
+          greetings: {
+            type: Object,
+            value: function() {
+              return {
+                cl: "",
+                rise: "",
+                retail: "Thank you for calling OneSupport, this is <First-Name> speaking. Can I get your first and last name? ... What can I help you with today?",
+                txo: "",
+                dps: "",
+                unknown: "Thank you for calling Technical Support this is <First-Name> speaking. Can I get...<see-feilds>"
+              }
+            }
+          },
+          notes: {
+            type: Object,
+            value: function() {
+              return {
+                isp: 5,
+                noc: "",
+                noa: "",
+                btn: "",
+                cbn: "",
+                ban: "",
+                msp: "",
+                ver: "",
+                rx: "",
+                order: "",
+                pts: "",
+                lmir: "",
+                vtr: "",
+                info: "",
+                issue: "",
+                ts: "",
+                todo: "",
+                res: ""
+              };
+            }
+          }
+        };
+      }
+
+      enableAllFields() {
+        var fields = [].slice.call(this.$.fields.children);
+        fields.forEach(function(itemToEnable) {
+          itemToEnable.setAttribute('style', '');
+        });
+      }
+
+      disableUnrelatedFields() {
+        var listToDisable = [];
+        switch (this.isp) {
+          case this.isps.cl: break;
+          case this.isps.rise: listToDisable.push(this.$.rx, this.$.ver, this.$.vtr); break;
+          case this.isps.retail: listToDisable.push(this.$.rx, this.$.ver, this.$.vtr); break;
+          case this.isps.txo: listToDisable.push(this.$.noa, this.$.rx, this.$.ver, this.$.vtr, this.$.lmir, this.$.info, this.$.msp); break;
+          case this.isps.dps: listToDisable.push(this.$.noa, this.$.rx, this.$.ver, this.$.vtr, this.$.lmir, this.$.info, this.$.msp); break;
+        }
+
+        listToDisable.forEach(function(itemToDisable) {
+          itemToDisable.value = "";
+          itemToDisable.setAttribute('style', 'display: none');
+        });
+      }
+
+      changeGreeting() {
+        switch (this.isp) {
+          case this.isps.cl: this.greeting = this.greetings.cl; break;
+          case this.isps.rise: this.greeting = this.greetings.rise; break;
+          case this.isps.retail: this.greeting = this.greetings.retail; break;
+          case this.isps.txo: this.greeting = this.greetings.txo; break;
+          case this.isps.dps: this.greeting = this.greetings.dps; break;
+          case this.isps.unknown: this.greeting = this.greetings.unknown; break;
+        }
+      }
+
+      changeISP() {
+        this.enableAllFields();
+        this.disableUnrelatedFields();
+        this.changeGreeting();
+        this.notes.isp = this.isp;
+      }
+    }
+
+    window.customElements.define(NoteGen.is, NoteGen);
+  </script>
+</dom-module>
