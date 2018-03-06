@@ -16,35 +16,44 @@
 
   .loader {
     color: #fff;
-    font-family: Consolas, Menlo, Monaco, monospace;
-    font-weight: bold;
+    font-family: monospace;
+    font-weight: lighter;
     font-size: 30vh;
-    opacity: 0.8;
   }
 
   .loader span {
     display: inline-block;
-    -webkit-animation: pulse 0.4s alternate infinite ease-in-out;
-    animation: pulse 0.4s alternate infinite ease-in-out;
+    -webkit-animation: pulse 0.25s alternate infinite ease-in-out;
+    animation: pulse 0.25s alternate infinite ease-in-out;
   }
 
   .loader span:nth-child(odd) {
-    -webkit-animation-delay: 0.4s;
-    animation-delay: 0.4s;
+    -webkit-animation-delay: 0.25s;
+    animation-delay: 0.25s;
   }
 
   @-webkit-keyframes pulse {
     to {
-      -webkit-transform: scale(0.8);
-      transform: scale(0.8);
-      opacity: 0.5;
+
+      opacity: 0.0;
     }
   }
 
   @keyframes pulse {
     to {
-      -webkit-transform: scale(0.8);
-      transform: scale(0.8);
-      opacity: 0.5;
+      opacity: 0.0;
     }
   }
+
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.4s 0.3s, opacity 0.4s 0.3s linear;
+}
