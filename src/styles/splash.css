@@ -1,50 +1,48 @@
-  #splash {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100%;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background-color: #396C93;
-    position: relative;
-    z-index: 99;
+#splash {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #396C93;
+  position: relative;
+  z-index: 99;
+}
+
+.loader {
+  color: #fff;
+  font-family: monospace;
+  font-weight: lighter;
+  font-size: 30vh;
+}
+
+.loader span {
+  display: inline-block;
+  -webkit-animation: blink 0.25s alternate infinite ease-in-out;
+  animation: blink 0.25s alternate infinite ease-in-out;
+}
+
+.loader span:nth-child(odd) {
+  -webkit-animation-delay: 0.25s;
+  animation-delay: 0.25s;
+}
+
+@-webkit-keyframes blink {
+  to {
+    opacity: 0.0;
   }
+}
 
-  .loader {
-    color: #fff;
-    font-family: monospace;
-    font-weight: lighter;
-    font-size: 30vh;
+@keyframes blink {
+  to {
+    opacity: 0.0;
   }
-
-  .loader span {
-    display: inline-block;
-    -webkit-animation: pulse 0.25s alternate infinite ease-in-out;
-    animation: pulse 0.25s alternate infinite ease-in-out;
-  }
-
-  .loader span:nth-child(odd) {
-    -webkit-animation-delay: 0.25s;
-    animation-delay: 0.25s;
-  }
-
-  @-webkit-keyframes pulse {
-    to {
-
-      opacity: 0.0;
-    }
-  }
-
-  @keyframes pulse {
-    to {
-      opacity: 0.0;
-    }
-  }
-
+}
 
 .visible {
   visibility: visible;
