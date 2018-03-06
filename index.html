@@ -10,25 +10,74 @@
   <meta name="description" content="A simple tool to make notes quickly">
 
   <base href="/">
-
-  <link rel="import" href="src/imports/theme.html">
-
-  <script src="src/scripts/polymer.js"></script>
-  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-
-
-  <link rel="import" href="src/views/app-framework.html">
-  <link rel="stylesheet" href="src/styles/main.css">
   <link rel="stylesheet" href="src/styles/splash.css">
+
+  <!-- See https://goo.gl/qRE0vM -->
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="manifest" href="manifest.json">
+
+  <meta name="theme-color" content="#396C93">
+
+  <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="My App">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="My App">
+
+  <!-- Homescreen icons -->
+  <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+
+  <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#396C93">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="src/scripts/splash.js"></script>
+
+  <script>
+    window.Polymer = {
+      rootPath: '/'
+    };
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js', {
+          scope: Polymer.rootPath,
+        });
+      });
+    }
+  </script>
+
+  <link rel="import" href="src/views/app-framework.html" async>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', 'Noto', sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      background-color: #eeeeee;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="splash">
-    <div class="loader">
-      <span>[</span>
-      <span>]</span>
-    </div>
-  </div>
+  <div id="splash" class="loader"><span>[</span><span>]</span></div>
   <app-framework></app-framework>
   <noscript> Please enable JavaScript to view this website. </noscript>
 </body>

@@ -113,8 +113,8 @@
 
       ready() {
         super.ready();
-        document.getElementById("splash").setAttribute('style', 'display: none');
         document.addEventListener('update-notes', this._updateNotes());
+        document.dispatchEvent(new CustomEvent('end-splash'));
       }
 
       static get properties() {
