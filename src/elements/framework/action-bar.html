@@ -3,6 +3,8 @@
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/paper-menu-button/paper-menu-button.html">
 
+<link rel="import" href="tab-bar.html">
+
 <dom-module id="action-bar">
   <template>
     <style>
@@ -80,12 +82,11 @@
         var buttonContainer = this.$.actionMenu;
         this.menuItems.forEach(function (item) {
           if (!item.beforeTitle && isbeforeTitle) {
-            var title = document.createElement('div');
+            var title = document.createElement('tab-bar');
             title.setAttribute('main-title', '');
             var num = (this.menuItems.length * 40) - (50 * overflow);
             title.style =
-              'display: inline-block; height: 40px; line-height: 40px; vertical-align: middle; width: calc(100% - ' +
-              num + 'px); overflow: hidden; text-overflow: ellipsis;';
+              'display: inline-block; height: 48px; line-height: 48px; vertical-align: middle; overflow: hidden; text-overflow: ellipsis;';
             title.innerHTML = this.title;
             this.$.actionMenu.appendChild(title);
             buttonContainer = document.createElement('div');

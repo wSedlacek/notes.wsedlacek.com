@@ -19,12 +19,12 @@
 
 <link rel="import" href="note-gen.html">
 <link rel="import" href="note-copy.html">
-<link rel="lazy-import" href="note-link.html">
 <link rel="lazy-import" href="note-finder.html">
 <link rel="lazy-import" href="note-history.html">
 <link rel="lazy-import" href="404-error.html">
 
 <link rel="import" href="../elements/framework/action-bar.html">
+<link rel="import" href="../elements/framework/user-manager.html">
 
 <dom-module id="app-framework">
   <template>
@@ -76,20 +76,20 @@
     <app-drawer-layout fullbleed narrow="{{narrow}}">
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-        <app-toolbar>Menu</app-toolbar>
+        <app-toolbar><user-manager></user-manager></app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="note-gen" href="[[rootPath]]note-gen">Generator</a>
-          <a name="note-copy" on-click="_updateNotes" href="[[rootPath]]note-copy">Copying</a>
-          <a name="note-link" href="[[rootPath]]note-link">Link Creator</a>
+          <a name="note-gen" href="[[rootPath]]note-gen">Generate</a>
+          <a name="note-copy" on-click="_updateNotes" href="[[rootPath]]note-copy">Copy</a>
+          <a name="note-finder" href="[[rootPath]]note-finder">Search</a>
           <a name="note-history" href="[[rootPath]]note-history">History</a>
         </iron-selector>
       </app-drawer>
 
       <!-- Main content -->
-      <app-header-layout has-scrolling-region>
+      <app-header-layout has-scrolling-region fullbleed>
 
-        <app-header slot="header" condenses reveals effects="waterfall">
-          <app-toolbar>
+        <app-header slot="header" condenses reveals effects="waterfall-tall">
+          <app-toolbar style="background-color: #396C93;">
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
             <action-bar></action-bar>
           </app-toolbar>
@@ -98,7 +98,7 @@
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="error-404" role="main">
           <note-gen id="gen" name="note-gen"></note-gen>
           <note-copy id="copy" name="note-copy"></note-copy>
-          <note-link name="note-link"></note-link>
+          <note-finder name="note-finder"></note-finder>
           <note-history name="note-history"></note-history>
           <error-404 name="error-404"></error-404>
         </iron-pages>

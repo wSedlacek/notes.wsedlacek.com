@@ -1,0 +1,26 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="user-manager">
+  <template>
+     {{user}}
+  </template>
+
+  <script>
+    class UserManager extends Polymer.Element {
+      static get is() {
+        return 'user-manager';
+      }
+
+      static get properties() {
+        return {
+          user: {
+            type: String,
+            value: "william.sedlacek"
+          }
+        };
+      }
+    }
+
+    window.customElements.define(UserManager.is, UserManager);
+  </script>
+</dom-module>

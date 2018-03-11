@@ -1,16 +1,56 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-tabs/paper-tabs.html">
 
-<dom-module id="replace-me">
+
+<dom-module id="tab-bar">
   <template>
+    <style is="custom-style">
+      paper-tabs {
+        font-family: 'Roboto', 'Noto', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        margin-bottom: 1px;
+        background-color: #396C93;
+        color: white;
+      }
+
+      paper-tabs[no-bar] paper-tab.iron-selected {
+        color: #ffff8d;
+      }
+    </style>
+
+    <paper-tabs selected="0" selected="0" no-bar>
+      <paper-tab>{{notes1.name}}</paper-tab>
+      <paper-tab>{{notes2.name}}</paper-tab>
+    </paper-tabs>
   </template>
 
   <script>
-    class ReplaceMe extends Polymer.Element {
+    class TabBar extends Polymer.Element {
       static get is() {
-        return 'replace-me';
+        return 'tab-bar';
+      }
+
+      static get properties() {
+        return {
+          notes1: {
+            type: Object,
+            value:  function () { return {
+              name: "William"
+              };
+            }
+          },
+          notes2: {
+            type: Object,
+            value: function () {
+              return {
+                name: "Joseph"
+              };
+            }
+          },
+        };
       }
     }
 
-    window.customElements.define(ReplaceMe.is, ReplaceMe);
+    window.customElements.define(TabBar.is, TabBar);
   </script>
 </dom-module>
