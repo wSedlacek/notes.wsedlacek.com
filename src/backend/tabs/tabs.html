@@ -30,7 +30,7 @@
             type: Number,
             value: 0,
             notify: true,
-            observer: "_updateSelectedNotes"
+            observer: "_updateSelectedNote"
           }
         };
       }
@@ -55,8 +55,10 @@
         this.selected = num;
       }
 
-      _updateSelectedNotes() {
-
+      _updateSelectedNote() {
+        if (this.notes[0] == null) return;
+        this.selectedNote = this.notes[this.selected];
+        document.dispatchEvent(new CustomEvent('update-note', {detail: {note: this.selectedNote}}));
       }
     }
 

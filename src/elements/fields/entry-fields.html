@@ -5,26 +5,32 @@
 <link rel="import" href="single-field.html">
 <link rel="import" href="multi-field.html">
 
+<link rel="import" href="../../backend/notes/note.html">
+
 <dom-module id="entry-fields">
   <template>
     <style include="shared-styles"></style>
 
+    <backend-note note="{{note}}"></backend-note>
+
     <div id="fields" class="card">
-      <single-field id="noc" label="Name of Caller" value="{{note.noc}}"></single-field>
-      <single-field id="noa" label="Name on the Account" value="{{note.noa}}"></single-field>
-      <single-field id="btn" label="Billing Telephone Number" value="{{note.btn}}"></single-field>
-      <single-field id="cbn" label="Callback Number" value="{{note.cbn}}"></single-field>
-      <single-field id="msp" label="Support Level" value="{{note.msp}}"></single-field>
-      <single-field id="ver" label="Verification Method" value="{{note.ver}}"></single-field>
-      <single-field id="rx" label="RX Number" value="{{note.rx}}"></single-field>
-      <single-field id="order" label="Order Number" value="{{note.order}}"></single-field>
-      <single-field id="lmir" label="LMIR Code" value="{{note.lmir}}"></single-field>
-      <single-field id="vtr" label="VTR Code" value="{{note.vtr}}"></single-field>
-      <multi-field id="info" label="Computer Info" value="{{note.info}}" rows=4></multi-field>
-      <multi-field id="issue" label="Issue" value="{{note.issue}}" rows=4></multi-field>
-      <multi-field id="ts" label="Troubleshooting" value="{{note.ts}}" rows=4></multi-field>
-      <multi-field id="todo" label="Todo" value="{{note.todo}}" rows=4></multi-field>
-      <multi-field id="res" label="Resolution" value="{{note.res}}" rows=2></multi-field>
+      <!--
+      <single-field id="noc" label="Name of Caller" entry="{{noc}}" on-entry-changed="updateNOC"></single-field>
+      <single-field id="noa" label="Name on the Account" entry="{{entries.1}}"></single-field>
+      <single-field id="btn" label="Billing Telephone Number" entry="{{entries.2}}"></single-field>
+      <single-field id="cbn" label="Callback Number" entry="{{entries[0]}}"></single-field>
+      <single-field id="msp" label="Support Level" entry="{{entries[0]}}"></single-field>
+      <single-field id="ver" label="Verification Method" entry="{{ver}}"></single-field>
+      <single-field id="rx" label="RX Number" entry="{{rx}}"></single-field>
+      <single-field id="order" label="Order Number" entry="{{order}}"></single-field>
+      <single-field id="lmir" label="LMIR Code" entry="{{lmir}}"></single-field>
+      <single-field id="vtr" label="VTR Code" entry="{{vtr}}"></single-field>
+      <multi-field id="info" label="Computer Info" entry="{{info}}" rows=4></multi-field>
+      <multi-field id="issue" label="Issue" entry="{{issue}}" rows=4></multi-field>
+      <multi-field id="ts" label="Troubleshooting" entry="{{ts}}" rows=4></multi-field>
+      <multi-field id="todo" label="Todo" entry="{{todo}}" rows=4></multi-field>
+      <multi-field id="res" label="Resolution" entry="{{res}}" rows=2></multi-field>
+      -->
     </div>
   </template>
 
@@ -36,8 +42,33 @@
 
       static get properties() {
         return {
-          note: Object
+          entries: {
+            type: Array,
+            value: function() {return []}
+          },
+          note: {
+            type: Object,
+            notify: true
+          }
         };
+      }
+
+      ready() {
+        super.ready();
+        this.createEntry(Object.keys(this.note)[1], this);
+      }
+
+      createEntry(key, reference) {
+        var currentEntry = document.createElement("single-field");
+        currentEntry.id = key;
+        currentEntry.label = "Name of Caller";
+        this.push("entries", this.note[key]);
+        currentEntry.entry = this.entries[this.entries.length-1];
+        currentEntry.addEventListener("entry-changed", function () {
+          reference.set('note.'+ key, currentEntry.entry);
+          document.dispatchEvent(new CustomEvent('update-tab', { detail: { name: currentEntry.entry } }));
+        });
+        this.$.fields.appendChild(currentEntry);
       }
 
       enableAllFields() {
@@ -51,7 +82,7 @@
         var listToDisable = [];
 
         listToDisable.forEach(function (itemToDisable) {
-          itemToDisable.value = "";
+          itemToDisable.value = String;
           itemToDisable.setAttribute('style', 'display: none');
         });
       }

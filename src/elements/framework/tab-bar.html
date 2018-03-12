@@ -44,13 +44,15 @@
         super.ready();
         this.add();
         document.addEventListener('add-tab', e => this.add());
+        document.addEventListener('update-tab', e => this.update(e.detail.name));
       }
 
       add() {
         this.$.backend.add();
         var note = this.$.backend.selectedNote;
         var tab = document.createElement("paper-tab");
-        tab.innerHTML = this.notes[this.numTabs].noc;
+        var tabTitle = (this.notes[this.numTabs].noc == "" ? "Unknown" : this.notes[this.numTabs].noc);
+        tab.innerHTML = tabTitle;
         this.$.tabs.appendChild(tab);
         this.selected = this.numTabs;
         this.numTabs++;
@@ -58,6 +60,11 @@
 
       delete() {
 
+      }
+
+      update(name) {
+        var tabTitle = (name == "" ? "Unknown" : name);
+        this.$.tabs.children[this.selected].innerHTML = tabTitle;
       }
     }
 

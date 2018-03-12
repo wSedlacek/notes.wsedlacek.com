@@ -3,7 +3,7 @@
 
 <dom-module id="multi-field">
   <template>
-    <paper-textarea id="field" always-float-label label="{{label}}" value="{{value}}" rows="{{rows}}"></paper-textarea>
+    <paper-textarea id="field" always-float-label label="{{label}}" value="{{entry}}" rows="{{rows}}"></paper-textarea>
   </template>
 
   <script>
@@ -14,7 +14,7 @@
       static get properties() {
         return {
           label: String,
-          value: String,
+          entry: String,
           rows: Number,
           enabled: {
             type: Boolean,

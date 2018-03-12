@@ -1,7 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../styles/shared.html">
 
-
 <link rel="import" href="../elements/isp-selector.html">
 <link rel="import" href="../elements/fields/entry-fields.html">
 
@@ -32,6 +31,11 @@
       ready() {
         super.ready();
         this.changeGreeting();
+        document.addEventListener('update-note', e => this.updateNote(e.detail.note));
+      }
+
+      updateNote(note) {
+        this.note = note;
       }
 
       static get properties() {
@@ -67,7 +71,10 @@
               }
             }
           },
-          note: Object
+          note: {
+            type: Object,
+            notify: true
+          }
         };
       }
 
@@ -93,8 +100,6 @@
             break;
         }
       }
-
-
     }
 
     window.customElements.define(NoteGen.is, NoteGen);

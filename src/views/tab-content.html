@@ -1,0 +1,44 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="note-gen.html">
+<link rel="import" href="note-copy.html">
+<link rel="lazy-import" href="note-finder.html">
+<link rel="lazy-import" href="note-history.html">
+<link rel="lazy-import" href="404-error.html">
+
+<dom-module id="tab-content">
+  <template>
+    <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="error-404" role="main">
+      <note-gen id="gen" name="note-gen" note="{{note}}"></note-gen>
+      <note-copy id="copy" name="note-copy" note="{{note}}"></note-copy>
+      <note-finder name="note-finder"></note-finder>
+      <note-history name="note-history"></note-history>
+      <error-404 name="error-404"></error-404>
+    </iron-pages>
+  </template>
+
+  <script>
+
+    class TabContent extends Polymer.Element {
+      static get is() {
+        return 'tab-content';
+      }
+
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            notify: true
+          },
+          note: {
+            type: Object
+          }
+        };
+      }
+    }
+
+    window.customElements.define(TabContent.is, TabContent);
+  </script>
+</dom-module>

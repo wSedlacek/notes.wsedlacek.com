@@ -3,7 +3,7 @@
 
 <dom-module id="single-field">
   <template>
-    <paper-input id="field" always-float-label label="{{label}}" value="{{value}}"></paper-input>
+    <paper-input id="field" always-float-label label="{{label}}" value="{{entry}}"></paper-input>
   </template>
 
   <script>
@@ -14,7 +14,10 @@
       static get properties() {
         return {
           label: String,
-          value: String,
+          entry: {
+            type: String,
+            notify: true
+          },
           enabled: {
             type: Boolean,
             observer: "_updateVisiblity"

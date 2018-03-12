@@ -12,19 +12,14 @@
 <link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
 
-<link rel="import" href="note-gen.html">
-<link rel="import" href="note-copy.html">
-<link rel="lazy-import" href="note-finder.html">
-<link rel="lazy-import" href="note-history.html">
-<link rel="lazy-import" href="404-error.html">
-
 <link rel="import" href="../elements/framework/action-bar.html">
 <link rel="import" href="../elements/framework/user-manager.html">
+
+<link rel="import" href="tab-content.html">
 
 <dom-module id="app-framework">
   <template>
@@ -80,7 +75,7 @@
         <user-manager></user-manager>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="note-gen" href="[[rootPath]]note-gen">Generate</a>
-          <a name="note-copy" on-click="_updateNotes" href="[[rootPath]]note-copy">Copy</a>
+          <a name="note-copy" href="[[rootPath]]note-copy">Copy</a>
           <a name="note-finder" href="[[rootPath]]note-finder">Search</a>
           <a name="note-history" href="[[rootPath]]note-history">History</a>
         </iron-selector>
@@ -96,13 +91,7 @@
           </app-toolbar>
         </app-header>
 
-        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="error-404" role="main">
-          <note-gen id="gen" name="note-gen" note="{{$.action.tabs.backend.note}}"></note-gen>
-          <note-copy id="copy" name="note-copy" note="{{$.action.tabs.backend.note}}"></note-copy>
-          <note-finder name="note-finder"></note-finder>
-          <note-history name="note-history"></note-history>
-          <error-404 name="error-404"></error-404>
-        </iron-pages>
+        <tab-content page="{{page}}"></tab-content>
       </app-header-layout>
     </app-drawer-layout>
   </template>
@@ -119,12 +108,12 @@
 
       ready() {
         super.ready();
-        document.addEventListener('update-notes', this._updateNotes());
         document.dispatchEvent(new CustomEvent('end-splash'));
       }
 
       static get properties() {
         return {
+          note: Object,
           page: {
             type: String,
             reflectToAttribute: true,
@@ -167,10 +156,6 @@
 
       _showPage404() {
         this.page = 'error-404';
-      }
-
-      _updateNotes() {
-
       }
     }
 
