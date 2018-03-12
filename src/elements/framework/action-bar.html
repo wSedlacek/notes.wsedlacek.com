@@ -33,6 +33,12 @@
             type: Array,
             value: function () {
               return [{
+                name: 'Add',
+                icon: 'add',
+                onclick: this._add,
+                beforeName: false,
+                overflowPiority: 1
+              }, {
                 name: 'Save',
                 icon: 'save',
                 onclick: this._save,

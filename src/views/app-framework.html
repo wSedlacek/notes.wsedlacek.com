@@ -32,6 +32,7 @@
       :host {
         --app-primary-color: #396C93;
         --app-secondary-color: black;
+        --app-drawer-width: 200px;
 
         display: block;
       }
@@ -76,7 +77,7 @@
     <app-drawer-layout fullbleed narrow="{{narrow}}">
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-        <app-toolbar><user-manager></user-manager></app-toolbar>
+        <user-manager></user-manager>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="note-gen" href="[[rootPath]]note-gen">Generate</a>
           <a name="note-copy" on-click="_updateNotes" href="[[rootPath]]note-copy">Copy</a>
@@ -88,7 +89,7 @@
       <!-- Main content -->
       <app-header-layout has-scrolling-region fullbleed>
 
-        <app-header slot="header" condenses reveals effects="waterfall-tall">
+        <app-header slot="header" condenses fixed effects="waterfall">
           <app-toolbar style="background-color: #396C93;">
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
             <action-bar></action-bar>

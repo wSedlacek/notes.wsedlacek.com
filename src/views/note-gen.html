@@ -1,7 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../styles/shared.html">
@@ -11,24 +10,27 @@
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
+      }
+
+      paper-dropdown-menu {
+        display: inline;
       }
     </style>
 
-    <div class="card" style="display: inline-block">
-      <paper-dropdown-menu always-float-label label="ISP">
-        <paper-listbox slot="dropdown-content" selected={{isp}}>
-          <paper-item>CenturyLink</paper-item>
-          <paper-item>Rise</paper-item>
-          <paper-item>Retail</paper-item>
-          <paper-item>Texas.gov</paper-item>
-          <paper-item>DPS Direct</paper-item>
-          <paper-item>Unknown</paper-item>
-        </paper-listbox>
+    <div class="card">
+      <paper-dropdown-menu always-float-label label="ISP" horizontal-align="center">
+        <paper-tabs slot="dropdown-content" selected={{isp}}>
+          <paper-tab>CenturyLink</paper-tab>
+          <paper-tab>Rise</paper-tab>
+          <paper-tab>Retail</paper-tab>
+          <paper-tab>Texas.gov</paper-tab>
+          <paper-tab>DPS Direct</paper-tab>
+          <paper-tab>Unknown</paper-tab>
+        </paper-tabs>
       </paper-dropdown-menu>
     </div>
-    <div class="card" style="display: inline-block">
+    <div class="card">
       <p id="greeting">{{greeting}}</p>
     </div>
     <div class="card">

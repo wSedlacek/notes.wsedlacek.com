@@ -1,8 +1,33 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
 <dom-module id="user-manager">
   <template>
-     {{user}}
+    <style>
+      app-toolbar {
+        background: #497CA3;
+        color: white;
+      }
+
+      .center {
+        text-align: center;
+        width: 100%;
+      }
+
+      .inline {
+        display: inline-block;
+      }
+      .avatar {
+        border-radius: 50%;
+        width: 32px;
+      }
+    </style>
+    <app-toolbar>
+      <img class="avatar" src="../../../images/test/photo.gif">
+      <div class="center inline">
+        <h>{{user}}</h>
+      </div>
+    </app-toolbar>
   </template>
 
   <script>
@@ -15,7 +40,7 @@
         return {
           user: {
             type: String,
-            value: "william.sedlacek"
+            value: "William Sedlacek"
           }
         };
       }
