@@ -1,0 +1,42 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-textarea.html">
+
+<dom-module id="multi-field">
+  <template>
+    <paper-textarea id="field" always-float-label label="{{label}}" value="{{value}}" rows="{{rows}}"></paper-textarea>
+  </template>
+
+  <script>
+    class MultiField extends Polymer.Element {
+      static get is() {
+        return 'multi-field';
+      }
+      static get properties() {
+        return {
+          label: String,
+          value: String,
+          rows: Number,
+          enabled: {
+            type: Boolean,
+            observer: "_updateVisiblity"
+          }
+        };
+      }
+
+      _updateVisiblity() {
+        if (enabled) this.$.fieldsetAttribute('style', '');
+        else this.$.fieldsetAttribute('style', 'display: none');
+      }
+
+      enable() {
+        this.enabled = true;
+      }
+
+      disable() {
+        this.enabled = false;
+      }
+    }
+
+    window.customElements.define(MultiField.is, MultiField);
+  </script>
+</dom-module>

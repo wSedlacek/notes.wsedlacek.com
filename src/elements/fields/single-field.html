@@ -1,0 +1,41 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+
+<dom-module id="single-field">
+  <template>
+    <paper-input id="field" always-float-label label="{{label}}" value="{{value}}"></paper-input>
+  </template>
+
+  <script>
+    class SingleField extends Polymer.Element {
+      static get is() {
+        return 'single-field';
+      }
+      static get properties() {
+        return {
+          label: String,
+          value: String,
+          enabled: {
+            type: Boolean,
+            observer: "_updateVisiblity"
+          }
+        };
+      }
+
+      _updateVisiblity() {
+        if (enabled) this.enable();
+        else this.disable();
+      }
+
+      enable() {
+        this.$.fieldsetAttribute('style', '');
+      }
+
+      disable() {
+        this.$.fieldsetAttribute('style', 'display: none');
+      }
+    }
+
+    window.customElements.define(SingleField.is, SingleField);
+  </script>
+</dom-module>

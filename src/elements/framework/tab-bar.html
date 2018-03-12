@@ -1,6 +1,7 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../bower_components/paper-tabs/paper-tabs.html">
 
+<link rel="import" href="../../backend/tabs/tabs.html">
 
 <dom-module id="tab-bar">
   <template>
@@ -18,10 +19,8 @@
       }
     </style>
 
-    <paper-tabs selected="0" selected="0" no-bar>
-      <paper-tab>{{notes1.name}}</paper-tab>
-      <paper-tab>{{notes2.name}}</paper-tab>
-    </paper-tabs>
+    <backend-tabs id="backend" notes="{{notes}}" selected="{{selected}}"></backend-tabs>
+    <paper-tabs id="tabs" selected="{{selected}}" no-bar></paper-tabs>
   </template>
 
   <script>
@@ -32,22 +31,33 @@
 
       static get properties() {
         return {
-          notes1: {
-            type: Object,
-            value:  function () { return {
-              name: "William"
-              };
-            }
-          },
-          notes2: {
-            type: Object,
-            value: function () {
-              return {
-                name: "Joseph"
-              };
-            }
-          },
+          selected: Number,
+          notes: Array,
+          numTabs: {
+            type: Number,
+            value: 0
+          }
         };
+      }
+
+      ready(reference = this) {
+        super.ready();
+        this.add();
+        document.addEventListener('add-tab', e => this.add());
+      }
+
+      add() {
+        this.$.backend.add();
+        var note = this.$.backend.selectedNote;
+        var tab = document.createElement("paper-tab");
+        tab.innerHTML = this.notes[this.numTabs].noc;
+        this.$.tabs.appendChild(tab);
+        this.selected = this.numTabs;
+        this.numTabs++;
+      }
+
+      delete() {
+
       }
     }
 

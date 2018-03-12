@@ -1,0 +1,62 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../styles/shared.html">
+
+<link rel="import" href="single-field.html">
+<link rel="import" href="multi-field.html">
+
+<dom-module id="entry-fields">
+  <template>
+    <style include="shared-styles"></style>
+
+    <div id="fields" class="card">
+      <single-field id="noc" label="Name of Caller" value="{{note.noc}}"></single-field>
+      <single-field id="noa" label="Name on the Account" value="{{note.noa}}"></single-field>
+      <single-field id="btn" label="Billing Telephone Number" value="{{note.btn}}"></single-field>
+      <single-field id="cbn" label="Callback Number" value="{{note.cbn}}"></single-field>
+      <single-field id="msp" label="Support Level" value="{{note.msp}}"></single-field>
+      <single-field id="ver" label="Verification Method" value="{{note.ver}}"></single-field>
+      <single-field id="rx" label="RX Number" value="{{note.rx}}"></single-field>
+      <single-field id="order" label="Order Number" value="{{note.order}}"></single-field>
+      <single-field id="lmir" label="LMIR Code" value="{{note.lmir}}"></single-field>
+      <single-field id="vtr" label="VTR Code" value="{{note.vtr}}"></single-field>
+      <multi-field id="info" label="Computer Info" value="{{note.info}}" rows=4></multi-field>
+      <multi-field id="issue" label="Issue" value="{{note.issue}}" rows=4></multi-field>
+      <multi-field id="ts" label="Troubleshooting" value="{{note.ts}}" rows=4></multi-field>
+      <multi-field id="todo" label="Todo" value="{{note.todo}}" rows=4></multi-field>
+      <multi-field id="res" label="Resolution" value="{{note.res}}" rows=2></multi-field>
+    </div>
+  </template>
+
+  <script>
+    class EntryFields extends Polymer.Element {
+      static get is() {
+        return 'entry-fields';
+      }
+
+      static get properties() {
+        return {
+          note: Object
+        };
+      }
+
+      enableAllFields() {
+        var fields = [].slice.call(this.$.fields.children);
+        fields.forEach(function (fieldToEnable) {
+          fieldToEnable.enable();
+        });
+      }
+
+      disableUnrelatedFields() {
+        var listToDisable = [];
+
+        listToDisable.forEach(function (itemToDisable) {
+          itemToDisable.value = "";
+          itemToDisable.setAttribute('style', 'display: none');
+        });
+      }
+    }
+
+    window.customElements.define(EntryFields.is, EntryFields);
+  </script>
+</dom-module>

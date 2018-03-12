@@ -92,13 +92,13 @@
         <app-header slot="header" condenses fixed effects="waterfall">
           <app-toolbar style="background-color: #396C93;">
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <action-bar></action-bar>
+            <action-bar id="action"></action-bar>
           </app-toolbar>
         </app-header>
 
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="error-404" role="main">
-          <note-gen id="gen" name="note-gen"></note-gen>
-          <note-copy id="copy" name="note-copy"></note-copy>
+          <note-gen id="gen" name="note-gen" note="{{$.action.tabs.backend.note}}"></note-gen>
+          <note-copy id="copy" name="note-copy" note="{{$.action.tabs.backend.note}}"></note-copy>
           <note-finder name="note-finder"></note-finder>
           <note-history name="note-history"></note-history>
           <error-404 name="error-404"></error-404>
@@ -170,7 +170,7 @@
       }
 
       _updateNotes() {
-        this.$.copy.createNotes(this.$.gen.notes);
+
       }
     }
 

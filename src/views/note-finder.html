@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../styles/shared.html">
 
-<dom-module id="note-history">
+<dom-module id="note-finder">
   <template>
     <style include="shared-styles">
       :host {
@@ -23,12 +23,12 @@
   </template>
 
   <script>
-    class NoteHistory extends Polymer.Element {
+    class NoteFinder extends Polymer.Element {
       static get is() {
-        return 'note-history';
+        return 'note-finder';
       }
     }
 
-    window.customElements.define(NoteHistory.is, NoteHistory);
+    window.customElements.define(NoteFinder.is, NoteFinder);
   </script>
 </dom-module>

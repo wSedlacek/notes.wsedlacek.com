@@ -1,16 +1,47 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 
-<dom-module id="replace-me">
+<link rel="import" href="../styles/shared.html">
+
+<dom-module id="isp-selector">
   <template>
+    <style include="shared-styles">
+      paper-dropdown-menu {
+        display: inline;
+      }
+    </style>
+
+    <div class="card">
+      <paper-dropdown-menu always-float-label label="ISP" horizontal-align="center">
+        <paper-tabs slot="dropdown-content" selected={{isp}}>
+          <paper-tab>CenturyLink</paper-tab>
+          <paper-tab>Rise</paper-tab>
+          <paper-tab>Retail</paper-tab>
+          <paper-tab>Texas.gov</paper-tab>
+          <paper-tab>DPS Direct</paper-tab>
+          <paper-tab>Unknown</paper-tab>
+        </paper-tabs>
+      </paper-dropdown-menu>
+    </div>
   </template>
 
   <script>
-    class ReplaceMe extends Polymer.Element {
+    class ISPSelector extends Polymer.Element {
       static get is() {
-        return 'replace-me';
+        return 'isp-selector';
+      }
+
+      static get properties() {
+        return {
+          isp: {
+            type: Number,
+            notify: true
+          },
+        };
       }
     }
 
-    window.customElements.define(ReplaceMe.is, ReplaceMe);
+    window.customElements.define(ISPSelector.is, ISPSelector);
   </script>
 </dom-module>

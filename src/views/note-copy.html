@@ -14,7 +14,7 @@
     </style>
 
     <div class="card">
-      <paper-textarea rows=20 always-float-label label="Notes" value="[[string]]"></paper-textarea>
+      <paper-textarea rows=20 always-float-label label="note" value="[[string]]"></paper-textarea>
       <paper-button raised>Copy</paper-button>
     </div>
   </template>
@@ -28,59 +28,35 @@
       static get properties() {
         return {
           string: String,
-          notes: {
-            type: Object,
-            value: function () {
-              return {
-                isp: 5,
-                noc: "",
-                noa: "",
-                btn: "",
-                cbn: "",
-                ban: "",
-                msp: "",
-                ver: "",
-                rx: "",
-                order: "",
-                pts: "",
-                lmir: "",
-                vtr: "",
-                info: "",
-                issue: "",
-                ts: "",
-                todo: "",
-                res: ""
-              };
-            }
-          },
+          note: Object
         };
       }
 
-      createNotes(notes) {
-        this.notes = notes;
+      createNote(note) {
+        this.note = note;
         this.string = "";
-        if (this.notes.noc != "" || this.notes.btn != "" || this.notes.cbn != "" || this.notes.ban != "" || this.notes
+        if (this.note.noc != "" || this.note.btn != "" || this.note.cbn != "" || this.note.ban != "" || this.note
           .rx != "") this.string += "===========Info==========\n";
-        if (this.notes.noc != "") this.string += "-Name: [" + this.notes.noc + "]\n";
-        if (this.notes.btn != "") this.string += "-BTN:  [" + this.notes.btn + "]\n";
-        if (this.notes.cbn != "") this.string += "-CBN:  [" + this.notes.cbn + "]\n";
-        if (this.notes.ban != "") this.string += "-BAN:  [" + this.notes.ban + "]\n";
-        if (this.notes.rx != "") this.string += "-RX:   [" + this.notes.rx + "]\n";
-        if (this.notes.ver != "" || this.notes.msp != "" || this.notes.order != "") this.string +=
+        if (this.note.noc != "") this.string += "-Name: [" + this.note.noc + "]\n";
+        if (this.note.btn != "") this.string += "-BTN:  [" + this.note.btn + "]\n";
+        if (this.note.cbn != "") this.string += "-CBN:  [" + this.note.cbn + "]\n";
+        if (this.note.ban != "") this.string += "-BAN:  [" + this.note.ban + "]\n";
+        if (this.note.rx != "") this.string += "-RX:   [" + this.note.rx + "]\n";
+        if (this.note.ver != "" || this.note.msp != "" || this.note.order != "") this.string +=
           "-------------------------\n";
-        if (this.notes.ver != "") this.string += "-Ver:   [" + this.notes.ver + "]\n";
-        if (this.notes.msp != "") this.string += "-MSP:   [" + this.notes.msp + "]\n";
-        if (this.notes.order != "") this.string += "-Ord:   [" + this.notes.order + "]\n";
-        if (this.notes.pts != "" || this.notes.vtr != "" || this.notes.lmir != "") this.string +=
+        if (this.note.ver != "") this.string += "-Ver:   [" + this.note.ver + "]\n";
+        if (this.note.msp != "") this.string += "-MSP:   [" + this.note.msp + "]\n";
+        if (this.note.order != "") this.string += "-Ord:   [" + this.note.order + "]\n";
+        if (this.note.pts != "" || this.note.vtr != "" || this.note.lmir != "") this.string +=
           "-------------------------\n";
-        if (this.notes.pts != "") this.string += "-PTS:   [" + this.notes.pts + "]\n";
-        if (this.notes.vtr != "") this.string += "-VTR:   [" + this.notes.vtr + "]\n";
-        if (this.notes.lmir != "") this.string += "-LMIR:  [" + this.notes.lmir + "]\n";
-        if (this.notes.info != "") this.string += "---------PC-INFO---------\n" + this.notes.info + "\n";
-        if (this.notes.issue != "") this.string += "==========Issue==========\n" + this.notes.issue + "\n";
-        if (this.notes.ts != "") this.string += "==========Notes==========\n" + this.notes.ts + "\n";
-        if (this.notes.todo != "") this.string += "Todo:\n" + this.notes.todo + "\n";
-        if (this.notes.res != "") this.string += "=======Resolution========\n" + this.notes.res + "\n";
+        if (this.note.pts != "") this.string += "-PTS:   [" + this.note.pts + "]\n";
+        if (this.note.vtr != "") this.string += "-VTR:   [" + this.note.vtr + "]\n";
+        if (this.note.lmir != "") this.string += "-LMIR:  [" + this.note.lmir + "]\n";
+        if (this.note.info != "") this.string += "---------PC-INFO---------\n" + this.note.info + "\n";
+        if (this.note.issue != "") this.string += "==========Issue==========\n" + this.note.issue + "\n";
+        if (this.note.ts != "") this.string += "==========note==========\n" + this.note.ts + "\n";
+        if (this.note.todo != "") this.string += "Todo:\n" + this.note.todo + "\n";
+        if (this.note.res != "") this.string += "=======Resolution========\n" + this.note.res + "\n";
       }
     }
 

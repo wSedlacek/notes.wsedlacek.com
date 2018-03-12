@@ -35,7 +35,7 @@
               return [{
                 name: 'Add',
                 icon: 'add',
-                onclick: this._add,
+                onclick: this._addTab,
                 beforeName: false,
                 overflowPiority: 1
               }, {
@@ -90,6 +90,7 @@
           if (!item.beforeTitle && isbeforeTitle) {
             var title = document.createElement('tab-bar');
             title.setAttribute('main-title', '');
+            title.setAttribute('id', 'tabs');
             var num = (this.menuItems.length * 40) - (50 * overflow);
             title.style =
               'display: inline-block; height: 48px; line-height: 48px; vertical-align: middle; overflow: hidden; text-overflow: ellipsis;';
@@ -143,6 +144,10 @@
           overflowMenuContainer.appendChild(overflowMenuList);
           buttonContainer.appendChild(overflowMenuContainer);
         }
+      }
+
+      _addTab() {
+        document.dispatchEvent(new CustomEvent('add-tab'));
       }
 
       _showRenameDeck(refenece = this) {

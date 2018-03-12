@@ -9,6 +9,37 @@
       static get is() {
         return 'backend-note';
       }
+
+      static get properties() {
+        return {
+          note: {
+            type: Object,
+            notify: true,
+            value: function () {
+              return {
+                isp: 5,
+                noc: "Testing",
+                noa: "",
+                btn: "",
+                cbn: "",
+                ban: "",
+                msp: "",
+                ver: "",
+                rx: "",
+                order: "",
+                pts: "",
+                lmir: "",
+                vtr: "",
+                info: "",
+                issue: "",
+                ts: "",
+                todo: "",
+                res: ""
+              };
+            }
+          }
+        };
+      }
     }
 
     window.customElements.define(BackendNote.is, BackendNote);
