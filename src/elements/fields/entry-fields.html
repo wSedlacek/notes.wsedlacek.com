@@ -2,8 +2,8 @@
 
 <link rel="import" href="../../styles/shared.html">
 
-<link rel="import" href="single-field.html">
-<link rel="import" href="multi-field.html">
+<link rel="lazy-import" href="single-field.html">
+<link rel="lazy-import" href="multi-field.html">
 
 <link rel="import" href="../../backend/notes/note.html">
 
@@ -42,48 +42,59 @@
 
       static get properties() {
         return {
-          entries: {
+          fields: {
             type: Array,
-            value: function() {return []}
+            value: function () { return [] }
           },
           note: {
             type: Object,
-            notify: true
+            notify: true,
+            observer: "updateFields"
           }
         };
       }
 
       ready() {
         super.ready();
-        this.createEntry(Object.keys(this.note)[1], this);
+        this.createField("noc", "Name of Caller", true);
       }
 
-      createEntry(key, reference) {
-        var currentEntry = document.createElement("single-field");
-        currentEntry.id = key;
-        currentEntry.label = "Name of Caller";
-        this.push("entries", this.note[key]);
-        currentEntry.entry = this.entries[this.entries.length-1];
-        currentEntry.addEventListener("entry-changed", function () {
-          reference.set('note.'+ key, currentEntry.entry);
-          document.dispatchEvent(new CustomEvent('update-tab', { detail: { name: currentEntry.entry } }));
+      createField(key, label, tab = false, rows = 1, reference = this) {
+        var field = document.createElement(rows == 1 ? "single-field" : "multi-field");
+        field.id = key;
+        field.label = label;
+        field.entry = this.note[field.id];
+        if (rows > 1) field.rows = rows;
+        field.addEventListener("entry-changed", function () {
+          reference.set('note.' + field.id, field.entry);
+          if (tab) document.dispatchEvent(new CustomEvent('update-tab', { detail: { name: field.entry }}));
         });
-        this.$.fields.appendChild(currentEntry);
+        this.$.fields.appendChild(field);
+        this.push("fields", field);
+      }
+
+      updateFields() {
+        this.fields.forEach(field => {
+          field.entry = this.note[field.id];
+        });
       }
 
       enableAllFields() {
-        var fields = [].slice.call(this.$.fields.children);
-        fields.forEach(function (fieldToEnable) {
-          fieldToEnable.enable();
+        this.fields.forEach(field => {
+          field.enable();
         });
       }
 
-      disableUnrelatedFields() {
+      disableUnrelatedFields(isp) {
         var listToDisable = [];
 
-        listToDisable.forEach(function (itemToDisable) {
-          itemToDisable.value = String;
-          itemToDisable.setAttribute('style', 'display: none');
+        this.fields.forEach(field => {
+          if (!isp.fields.includes(field.id)) listToDisable.push(field);
+        });
+
+        listToDisable.forEach(field => {
+          field.value = "";
+          field.setAttribute('style', 'display: none');
         });
       }
     }
