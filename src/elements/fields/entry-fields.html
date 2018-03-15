@@ -2,8 +2,8 @@
 
 <link rel="import" href="../../styles/shared.html">
 
-<link rel="lazy-import" href="single-field.html">
-<link rel="lazy-import" href="multi-field.html">
+<link rel="import" href="single-field.html">
+<link rel="import" href="multi-field.html">
 
 <link rel="import" href="../../backend/notes/note.html">
 
@@ -67,7 +67,8 @@
         if (rows > 1) field.rows = rows;
         field.addEventListener("entry-changed", function () {
           reference.set('note.' + field.id, field.entry);
-          if (tab) document.dispatchEvent(new CustomEvent('update-tab', { detail: { name: field.entry }}));
+          if (tab && !field.ignoreUpdate) document.dispatchEvent(new CustomEvent('update-tab', { detail: { name: field.entry }}));
+          else if (field.ignoreUpdate) field.ignoreUpdate = false;
         });
         this.$.fields.appendChild(field);
         this.push("fields", field);
@@ -75,6 +76,7 @@
 
       updateFields() {
         this.fields.forEach(field => {
+          field.ignoreUpdate = true;
           field.entry = this.note[field.id];
         });
       }
