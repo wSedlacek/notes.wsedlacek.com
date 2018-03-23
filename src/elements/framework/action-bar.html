@@ -19,6 +19,9 @@
       }
     </style>
     <div id="actionMenu">
+      <div id="preTitleButtons"></div>
+      <tab-bar id="tabs"></tab-bar>
+      <div id="postTitleButtons"></div>
     </div>
   </template>
 
@@ -46,11 +49,6 @@
                 overflowPiority: 1
               }];
             }
-          },
-          title: {
-            type: String,
-            value: 'Unknown',
-            observer: '_populateActionMenu'
           }
         };
       }
@@ -62,17 +60,30 @@
         };
         window.onresize = function () {
           oldresize();
-          reference._populateActionMenu(null, null, reference);
+          reference._populateActionMenu(reference);
         };
-        document.addEventListener('update-title', e => this.updateTitle(e.detail.title));
+
+        reference._populateActionMenu();
       }
 
-      _populateActionMenu(ignoreN, ignoreO, reference = this) {
-        if (this.menuItems == null) return;
+      _emptyActionMenu() {
+        while (this.$.preTitleButtons.childNodes.length > 0) {
+          this.$.preTitleButtons.removeChild(this.$.preTitleButtons.lastChild);
+        }
+
+        while (this.$.postTitleButtons.childNodes.length > 0) {
+          this.$.postTitleButtons.removeChild(this.$.postTitleButtons.lastChild);
+        }
 
         while (this.$.actionMenu.childNodes.length > 1) {
           this.$.actionMenu.removeChild(this.$.actionMenu.lastChild);
         }
+      }
+
+      _populateActionMenu(reference = this) {
+        if (this.menuItems == null) return;
+
+        this._emptyActionMenu();
 
         var width = window.innerWidth ||
           document.documentElement.clientWidth ||
@@ -85,18 +96,17 @@
 
         var isbeforeTitle = true;
         var overlowMenu = [];
-        var buttonContainer = this.$.actionMenu;
+        var buttonContainer = this.$.preTitleButtons;
         this.menuItems.forEach(function (item) {
           if (!item.beforeTitle && isbeforeTitle) {
-            var title = document.createElement('tab-bar');
+            var title = this.$.tabs;
             title.setAttribute('main-title', '');
-            title.setAttribute('id', 'tabs');
-            var num = (this.menuItems.length * 40) - (50 * overflow);
+            var num = (this.menuItems.length - overflow >= 0 ? this.menuItems.length - overflow : 0) * 40  + (overflow > 1 ? 40 : 0);
             title.style =
-              'display: inline-block; height: 48px; line-height: 48px; vertical-align: middle; overflow: hidden; text-overflow: ellipsis;';
+              'display: inline-block; height: 48px; line-height: 48px; vertical-align: middle; overflow: hidden; text-overflow: ellipsis; width: calc(100% - ' + num +'px);';
             title.innerHTML = this.title;
             this.$.actionMenu.appendChild(title);
-            buttonContainer = document.createElement('div');
+            buttonContainer = this.$.postTitleButtons;
             buttonContainer.style = 'float: right; position: absolute; top: 10px; right: 5px;';
             this.$.actionMenu.appendChild(buttonContainer);
             isbeforeTitle = false;
@@ -150,17 +160,12 @@
         document.dispatchEvent(new CustomEvent('add-tab'));
       }
 
-      _showRenameDeck(refenece = this) {
-        document.dispatchEvent(new CustomEvent('show-rename-deck', {
-          detail: {
-            deckname: refenece.deckname
-          }
-        }));
+      show() {
+
       }
 
-      updateTitle(title) {
-        if (title != null)
-          this.title = title;
+      hide() {
+
       }
     }
 

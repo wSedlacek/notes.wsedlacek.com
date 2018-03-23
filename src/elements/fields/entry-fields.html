@@ -1,12 +1,10 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../../backend/notes/note.html">
 <link rel="import" href="../../styles/shared.html">
 
 <link rel="import" href="single-field.html">
 <link rel="import" href="multi-field.html">
-
-<link rel="import" href="../../backend/notes/note.html">
-
 <dom-module id="entry-fields">
   <template>
     <style include="shared-styles"></style>
@@ -15,8 +13,6 @@
 
     <div id="fields" class="card">
       <!--
-      <single-field id="noc" label="Name of Caller" entry="{{noc}}" on-entry-changed="updateNOC"></single-field>
-      <single-field id="noa" label="Name on the Account" entry="{{entries.1}}"></single-field>
       <single-field id="btn" label="Billing Telephone Number" entry="{{entries.2}}"></single-field>
       <single-field id="cbn" label="Callback Number" entry="{{entries[0]}}"></single-field>
       <single-field id="msp" label="Support Level" entry="{{entries[0]}}"></single-field>
@@ -34,6 +30,7 @@
     </div>
   </template>
 
+  <script src="fields.js"></script>
   <script>
     class EntryFields extends Polymer.Element {
       static get is() {
@@ -44,7 +41,9 @@
         return {
           fields: {
             type: Array,
-            value: function () { return [] }
+            value: function () {
+              return []
+            }
           },
           note: {
             type: Object,
@@ -56,22 +55,32 @@
 
       ready() {
         super.ready();
-        this.createField("noc", "Name of Caller", true);
+
+        json.entries.forEach(entry => {
+          if (entry.type == "field") this.createField(entry)
+          else if (entry.type == "div") this.createDiv(entry);
+        });
       }
 
-      createField(key, label, tab = false, rows = 1, reference = this) {
-        var field = document.createElement(rows == 1 ? "single-field" : "multi-field");
-        field.id = key;
-        field.label = label;
+      createField(entry, reference = this) {
+        var field = document.createElement(entry.rows == 1 ? "single-field" : "multi-field");
+        field.id = entry.key;
+        field.label = entry.label;
+        field.pre = entry.pre;
+        field.post = entry.post;
         field.entry = this.note[field.id];
-        if (rows > 1) field.rows = rows;
+        if (entry.rows > 1) field.rows = entry.rows;
         field.addEventListener("entry-changed", function () {
           reference.set('note.' + field.id, field.entry);
-          if (tab && !field.ignoreUpdate) document.dispatchEvent(new CustomEvent('update-tab', { detail: { name: field.entry }}));
+          if (entry.tab && !field.ignoreUpdate) document.dispatchEvent(new CustomEvent('update-tab', {detail: {name: field.entry}}));
           else if (field.ignoreUpdate) field.ignoreUpdate = false;
         });
         this.$.fields.appendChild(field);
         this.push("fields", field);
+      }
+
+      createDiv() {
+
       }
 
       updateFields() {

@@ -20,7 +20,7 @@
     </style>
 
     <backend-tabs id="backend" notes="{{notes}}" selected="{{selected}}"></backend-tabs>
-    <paper-tabs id="tabs" selected="{{selected}}" no-bar></paper-tabs>
+    <paper-tabs id="tabs" selected="{{selected}}" no-bar scrollable hide-scroll-buttons></paper-tabs>
   </template>
 
   <script>
@@ -50,7 +50,7 @@
         this.$.backend.add();
         var note = this.$.backend.selectedNote;
         var tab = document.createElement("paper-tab");
-        var tabTitle = (this.notes[this.numTabs].noc == "" ? "Unknown" : this.notes[this.numTabs].noc);
+        var tabTitle = ("Unknown");
         tab.innerHTML = tabTitle;
         this.$.tabs.appendChild(tab);
         this.selected = this.numTabs;
@@ -63,8 +63,8 @@
 
       update(name) {
         if (this.$.tabs.children[this.selected] == null) return;
-        var tabTitle = (name == "" ? "Unknown" : name);
-        this.$.tabs.children[this.selected].innerHTML = tabTitle;
+        var tabTitle = (name == "" ? "Unknown" : name).split(" ")[0];
+        this.$.tabs.children[this.selected].innerHTML = tabTitle.slice(0,10);
       }
     }
 
