@@ -3,6 +3,7 @@
 
 <link rel="import" href="../elements/isp-selector.html">
 <link rel="import" href="../elements/fields/entry-fields.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
 
 <dom-module id="note-gen">
   <template>
@@ -10,6 +11,11 @@
       :host {
         display: block;
         padding: 10px;
+      }
+      paper-fab {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
       }
     </style>
 
@@ -20,6 +26,7 @@
     </div>
 
     <entry-fields note={{note}}></entry-fields>
+    <paper-fab icon="content-copy"></paper-fab>
   </template>
 
   <script>

@@ -2,21 +2,20 @@
 
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
+<link rel="import" href="note-empty.html">
 <link rel="import" href="note-gen.html">
-<link rel="import" href="note-copy.html">
-<link rel="lazy-import" href="note-finder.html">
-<link rel="lazy-import" href="note-history.html">
+<link rel="import" href="note-finder.html">
+<link rel="import" href="note-history.html">
 <link rel="lazy-import" href="404-error.html">
-<link rel="lazy-import" href="note-empty.html">
+
 
 <dom-module id="tab-content">
   <template>
     <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="error-404" role="main">
+      <note-empty name="note-empty"></note-empty>
       <note-gen id="gen" name="note-gen" note="{{note}}"></note-gen>
-      <note-copy id="copy" name="note-copy" note="{{note}}"></note-copy>
       <note-finder name="note-finder"></note-finder>
       <note-history name="note-history"></note-history>
-      <note-empty name="note-empty"></note-empty>
       <error-404 name="error-404"></error-404>
     </iron-pages>
   </template>
