@@ -109,6 +109,7 @@
       ready() {
         super.ready();
         document.dispatchEvent(new CustomEvent('end-splash'));
+        document.addEventListener('add-tab', e => this.noNotesOpened = false);
       }
 
       static get properties() {
@@ -123,25 +124,30 @@
           subroute: Object,
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
-          rootPath: String
+          rootPath: String,
+          noNotesOpened: {
+            type: Boolean,
+            value: true
+          }
         };
       }
 
       static get observers() {
         return [
-          '_routePageChanged(routeData.page)',
+          '_routePageChanged(routeData.page, noNotesOpened)',
         ];
       }
 
-      _routePageChanged(page) {
+      _routePageChanged(page, noNotesOpened) {
         // If no page was found in the route data, page will be an empty string.
         // Default to 'note-gen' in that case.
-        this.page = page || 'note-gen';
+        this.page = noNotesOpened && (page == 'note-gen' || page == 'note-copy') ? 'note-empty' : page;
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
           this.$.drawer.close();
         }
+
       }
 
       _pageChanged(page) {
@@ -155,7 +161,7 @@
       }
 
       _showPage404() {
-        this.page = 'error-404';
+        this.page = '404-error';
       }
     }
 

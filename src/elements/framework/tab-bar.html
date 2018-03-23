@@ -42,7 +42,6 @@
 
       ready(reference = this) {
         super.ready();
-        this.add();
         document.addEventListener('add-tab', e => this.add());
         document.addEventListener('update-tab', e => this.update(e.detail.name));
       }

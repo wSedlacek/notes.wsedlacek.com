@@ -1,0 +1,22 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="div-field">
+  <template>
+  </template>
+
+  <script>
+    class DivField extends Polymer.Element {
+      static get is() {
+        return 'div-field';
+      }
+      static get properties() {
+        return {
+          entry: String,
+          enabled: Boolean
+        };
+      }
+    }
+
+    window.customElements.define(DivField.is, DivField);
+  </script>
+</dom-module>

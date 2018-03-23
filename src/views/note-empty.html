@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-icons/notification-icons.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="note-empty">
+  <template>
+    <style>
+      .full {
+        margin: 15px;
+        width: -moz-available;
+        width: -webkit-fill-available;
+        height: 56vh;
+      }
+
+      .gray {
+        color: var(--google-grey-500);
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      .inline {
+        display: inline-block;
+      }
+    </style>
+
+    <div class="full center">
+      <iron-icon class="full center gray" icon="notification:event-note"></iron-icon>
+    </div>
+    <div class="full center">
+      <p class="center inline">No Notes Created</p>
+      <paper-button class="center inline" raised>Create New Note</paper-button>
+    </div>
+
+  </template>
+
+  <script>
+    class NoteEmpty extends Polymer.Element {
+
+      static get is() {
+        return 'note-empty';
+      }
+
+      static get properties() {
+        return {
+
+        };
+      }
+    }
+
+    window.customElements.define(NoteEmpty.is, NoteEmpty);
+  </script>
+</dom-module>
