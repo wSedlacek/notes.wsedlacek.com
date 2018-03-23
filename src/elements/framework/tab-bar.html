@@ -62,6 +62,7 @@
       }
 
       update(name) {
+        if (this.$.tabs.children[this.selected] == null) return;
         var tabTitle = (name == "" ? "Unknown" : name);
         this.$.tabs.children[this.selected].innerHTML = tabTitle;
       }

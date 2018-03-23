@@ -9,7 +9,11 @@
         margin: 15px;
         width: -moz-available;
         width: -webkit-fill-available;
+      }
+
+      .large {
         height: 56vh;
+        width: 100%;
       }
 
       .gray {
@@ -26,13 +30,9 @@
     </style>
 
     <div class="full center">
-      <iron-icon class="full center gray" icon="notification:event-note"></iron-icon>
+      <iron-icon class="large gray" icon="notification:event-note"></iron-icon>
+      <paper-button raised on-tap="_addTab">Create New Note</paper-button>
     </div>
-    <div class="full center">
-      <p class="center inline">No Notes Created</p>
-      <paper-button class="center inline" raised>Create New Note</paper-button>
-    </div>
-
   </template>
 
   <script>
@@ -46,6 +46,10 @@
         return {
 
         };
+      }
+
+      _addTab() {
+        document.dispatchEvent(new CustomEvent('add-tab'));
       }
     }
 
