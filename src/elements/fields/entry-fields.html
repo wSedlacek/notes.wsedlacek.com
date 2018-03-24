@@ -79,8 +79,13 @@
         this.push("fields", field);
       }
 
-      createDiv() {
-
+      createDiv(entry) {
+        var field = document.createElement("div-field");
+        field.id = entry.key;
+        field.text = entry.text;
+        field.enabled = true;
+        this.$.fields.appendChild(field);
+        this.push("fields", field);
       }
 
       updateFields() {
