@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="blur-style">
+  <template>
+    <style>
+      .blur-on,
+      .blur {
+        -webkit-filter: blur(10px);
+        -moz-filter: blur(10px);
+        -o-filter: blur(10px);
+        -ms-filter: blur(10px);
+        filter: blur(10px);
+        transition: all 0.5s linear;
+        -webkit-transition: all 0.5s linear;
+        -o-transition: all 0.5s linear;
+        -moz-transition: all 0s linear;
+      }
+
+      .blur-off {
+        -webkit-filter: blur(0px) !important;
+        -moz-filter: blur(0px) !important;
+        -o-filter: blur(0px) !important;
+        -ms-filter: blur(0px) !important;
+        filter: blur(0px) !important;
+      }
+
+      .blur-bgimage:before {
+        content: "";
+        position: absolute;
+        height: 20%;
+        width: 20%;
+        background-size: cover;
+        background: inherit;
+        z-index: -1;
+        transform: scale(5);
+        transform-origin: top left;
+        filter: blur(2px);
+        -moz-transform: scale(5);
+        -moz-transform-origin: top left;
+        -moz-filter: blur(2px);
+        -webkit-transform: scale(5);
+        -webkit-transform-origin: top left;
+        -webkit-filter: blur(2px);
+        -o-transform: scale(5);
+        -o-transform-origin: top left;
+        -o-filter: blur(2px);
+        transition: all 5s linear;
+        -moz-transition: all 5s linear;
+        -webkit-transition: all 5s linear;
+        -o-transition: all 5s linear;
+      }
+    </style>
+  </template>
+</dom-module>

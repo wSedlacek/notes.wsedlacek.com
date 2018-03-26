@@ -2,17 +2,30 @@
 <link rel="import" href="../../../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="dialog.html">
 
-<dom-module id="note-copy">
+<dom-module id="dialog-copy">
   <template>
-    <paper-textarea rows=20 always-float-label value="[[string]]"></paper-textarea>
-    <paper-button raised>Copy</paper-button>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <dialog-template id="dialog" header="Copy notes">
+      <paper-textarea rows=20 always-float-label value="[[string]]" style="width: 80vh;"></paper-textarea>
+      <paper-button raised>Copy</paper-button>
+    </dialog-template>
   </template>
 
   <script>
-    class NoteCopy extends Polymer.Element {
+    class DialogCopy extends Polymer.Element {
       static get is() {
-        return 'note-copy';
+        return 'dialog-copy';
+      }
+
+      ready() {
+        super.ready();
+        document.addEventListener('show-dialog-copy', e => this.show());
       }
 
       static get properties() {
@@ -22,34 +35,15 @@
         };
       }
 
-      createNote(note) {
-        this.note = note;
-        this.string = "";
-        if (this.note.noc != "" || this.note.btn != "" || this.note.cbn != "" || this.note.ban != "" || this.note
-          .rx != "") this.string += "===========Info==========\n";
-        if (this.note.noc != "") this.string += "-Name: [" + this.note.noc + "]\n";
-        if (this.note.btn != "") this.string += "-BTN:  [" + this.note.btn + "]\n";
-        if (this.note.cbn != "") this.string += "-CBN:  [" + this.note.cbn + "]\n";
-        if (this.note.ban != "") this.string += "-BAN:  [" + this.note.ban + "]\n";
-        if (this.note.rx != "") this.string += "-RX:   [" + this.note.rx + "]\n";
-        if (this.note.ver != "" || this.note.msp != "" || this.note.order != "") this.string +=
-          "-------------------------\n";
-        if (this.note.ver != "") this.string += "-Ver:   [" + this.note.ver + "]\n";
-        if (this.note.msp != "") this.string += "-MSP:   [" + this.note.msp + "]\n";
-        if (this.note.order != "") this.string += "-Ord:   [" + this.note.order + "]\n";
-        if (this.note.pts != "" || this.note.vtr != "" || this.note.lmir != "") this.string +=
-          "-------------------------\n";
-        if (this.note.pts != "") this.string += "-PTS:   [" + this.note.pts + "]\n";
-        if (this.note.vtr != "") this.string += "-VTR:   [" + this.note.vtr + "]\n";
-        if (this.note.lmir != "") this.string += "-LMIR:  [" + this.note.lmir + "]\n";
-        if (this.note.info != "") this.string += "---------PC-INFO---------\n" + this.note.info + "\n";
-        if (this.note.issue != "") this.string += "==========Issue==========\n" + this.note.issue + "\n";
-        if (this.note.ts != "") this.string += "==========note==========\n" + this.note.ts + "\n";
-        if (this.note.todo != "") this.string += "Todo:\n" + this.note.todo + "\n";
-        if (this.note.res != "") this.string += "=======Resolution========\n" + this.note.res + "\n";
+      show() {
+        this.$.dialog.show();
+      }
+
+      hide() {
+        this.$.dialog.hide();
       }
     }
 
-    window.customElements.define(NoteCopy.is, NoteCopy);
+    window.customElements.define(DialogCopy.is, DialogCopy);
   </script>
 </dom-module>

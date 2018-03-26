@@ -26,7 +26,7 @@
     </div>
 
     <entry-fields note={{note}}></entry-fields>
-    <paper-fab icon="content-copy"></paper-fab>
+    <paper-fab icon="content-copy" on-tap="showCopy"></paper-fab>
   </template>
 
   <script>
@@ -83,6 +83,10 @@
             notify: true
           }
         };
+      }
+
+      showCopy() {
+        document.dispatchEvent(new CustomEvent('show-dialog-copy'));
       }
 
       changeGreeting() {

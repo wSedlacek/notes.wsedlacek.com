@@ -1,8 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animations.html">
-
 <link rel="import" href="../../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
@@ -13,17 +10,22 @@
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
 
 <link rel="import" href="../elements/framework/action-bar.html">
 <link rel="import" href="../elements/framework/user-manager.html">
+<link rel="import" href="../elements/dialogs/controler.html">
 
 <link rel="import" href="tab-content.html">
 
+<link rel="import" href="../styles/blur.html">
+
 <dom-module id="app-framework">
   <template>
-    <style>
+    <style include="blur-style">
       :host {
         --app-primary-color: #396C93;
         --app-secondary-color: black;
@@ -69,7 +71,7 @@
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}">
     </app-route>
 
-    <app-drawer-layout fullbleed narrow="{{narrow}}">
+    <app-drawer-layout class="blurable" fullbleed narrow="{{narrow}}">
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
         <user-manager></user-manager>
@@ -93,6 +95,8 @@
         <tab-content page="{{page}}"></tab-content>
       </app-header-layout>
     </app-drawer-layout>
+
+    <dialog-controler class="controler"></dialog-controler>
   </template>
 
   <script>
