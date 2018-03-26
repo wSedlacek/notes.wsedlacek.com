@@ -41,6 +41,7 @@
         return {
           fields: {
             type: Array,
+            notify: true,
             value: function () {
               return []
             }
@@ -64,6 +65,7 @@
 
       createField(entry, reference = this) {
         var field = document.createElement(entry.rows == 1 ? "single-field" : "multi-field");
+        field.type = "field";
         field.id = entry.key;
         field.label = entry.label;
         field.pre = entry.pre;
@@ -72,7 +74,11 @@
         if (entry.rows > 1) field.rows = entry.rows;
         field.addEventListener("entry-changed", function () {
           reference.set('note.' + field.id, field.entry);
-          if (entry.tab && !field.ignoreUpdate) document.dispatchEvent(new CustomEvent('update-tab', {detail: {name: field.entry}}));
+          if (entry.tab && !field.ignoreUpdate) document.dispatchEvent(new CustomEvent('update-tab', {
+            detail: {
+              name: field.entry
+            }
+          }));
           else if (field.ignoreUpdate) field.ignoreUpdate = false;
         });
         this.$.fields.appendChild(field);
@@ -81,6 +87,7 @@
 
       createDiv(entry) {
         var field = document.createElement("div-field");
+        field.type = "div";
         field.id = entry.key;
         field.text = entry.text;
         field.enabled = true;

@@ -9,7 +9,7 @@ var json = {
     "label": "Name of Caller",
     "tab": true,
     "rows": 1,
-    "pre": "-NOC [",
+    "pre": "-NOC: [",
     "post": "]",
     "linked": "noa"
   }, {
@@ -18,7 +18,7 @@ var json = {
     "label": "Name on the Account",
     "tab": false,
     "rows": 1,
-    "pre": "-NOA [",
+    "pre": "-NOA: [",
     "post": "]",
     "linked": "noc"
   }]

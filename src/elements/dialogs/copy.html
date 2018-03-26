@@ -12,7 +12,7 @@
       }
     </style>
     <dialog-template id="dialog" header="Copy notes">
-      <paper-textarea rows=20 always-float-label value="[[string]]" style="width: 80vh;"></paper-textarea>
+      <paper-textarea rows=20 always-float-label value="{{string}}" style="width: 80vh;"></paper-textarea>
       <paper-button raised>Copy</paper-button>
     </dialog-template>
   </template>
@@ -25,23 +25,35 @@
 
       ready() {
         super.ready();
-        document.addEventListener('show-dialog-copy', e => this.show());
+        document.addEventListener('show-dialog-copy', e => this.show(e.detail.entries));
       }
 
       static get properties() {
         return {
-          string: String,
-          note: Object
+          string: String
         };
       }
 
-      show() {
+      show(entries) {
+        if (entries != null) this.createCopy(entries);
         this.$.dialog.show();
       }
 
       hide() {
         this.$.dialog.hide();
       }
+
+      createCopy(entries) {
+        this.string = "";
+        entries.forEach(field => {
+          if (field.type == "field") {
+            if (field.entry != undefined) this.string += field.pre + field.entry + field.post + "\n";
+          } else if (field.type == "div") {
+            this.string += field.text + "\n";
+          }
+        });
+      }
+
     }
 
     window.customElements.define(DialogCopy.is, DialogCopy);
