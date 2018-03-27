@@ -5,11 +5,11 @@ Key design guidelines.
 4. Infitly scalable
 
 Project goals:
-To replace notpad and provide a better and more elgant solution for taking notes.
-Ultimately notepad is very varitile so replacing it isn't easy. One must create a tool that is optimized for it's funtion far beyong what notepad alone can do.
-Quality of life changes are what make all the difference, things like support for tab to field, multible tabs, local storage, smart formating, pts and txo link gen etc.
+To replace notepad and provide a better and more elegant solution for taking notes.
+Ultimately notepad is very versatile so replacing it isn't easy. One must create a tool that is optimized for it's function far beyond what notepad alone can do.
+Quality of life changes are what make all the difference, things like support for tab to field, multiple tabs, local storage, smart formatting, pts and txo link gen etc.
 This tool is being made in a way to make it so any ISP can be added or removed simply by editing a few json files meaning that it can be used by all BU and updated quickly and easily when needed.
-Using the polymer framework makes this project get a lot of free styling and makes devolpment much easier since the code formatting is much more friendly to work with meaning the time to devolpe this application is heavily expdited.
+Using the polymer framework makes this project get a lot of free styling and makes development much easier since the code formatting is much more friendly to work with meaning the time to develop this application is heavily expedited.
 
 
 0. Div Fields
