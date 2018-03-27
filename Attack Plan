@@ -1,6 +1,21 @@
+Key design guidelines.
+1. Simple.
+2. Universal.
+3. Efficent.
+4. Infitly scalable
+
+Project goals:
+To replace notpad and provide a better and more elgant solution for taking notes.
+Ultimately notepad is very varitile so replacing it isn't easy. One must create a tool that is optimized for it's funtion far beyong what notepad alone can do.
+Quality of life changes are what make all the difference, things like support for tab to field, multible tabs, local storage, smart formating, pts and txo link gen etc.
+This tool is being made in a way to make it so any ISP can be added or removed simply by editing a few json files meaning that it can be used by all BU and updated quickly and easily when needed.
+Using the polymer framework makes this project get a lot of free styling and makes devolpment much easier since the code formatting is much more friendly to work with meaning the time to devolpe this application is heavily expdited.
+
+
 0. Div Fields
 1. Dialogs
 1a. Note Coping Dialog.
+6. Deleting Tabs.
 
 TODO:
 1b. Sales Dialog.
@@ -9,7 +24,6 @@ TODO:
 4. ISPs by JSON
 4a. ISP Selector
 5. Greetings.
-6. Deleting Tabs.
 7. Common Issues.
 8. Local Storage.
 9. Saving Notes.
@@ -25,10 +39,15 @@ TODO:
 19. Keyboard Shortcuts.
 20. User Login.
 21. User Preferences.
-22. QR Code
+22. QR Code for sessions.
 23. Cleanup.
 24. UI Improvements.
 25. Feedback and Bug Fixes.
 26. Callback Timers.
-27. Shift to shell.tni
-
+27. Multible field types for Dropdowns, Radio, Etc.
+28. Animations for: Cards coming into place, cards leaving, tabs, changing views, starting a new note, callback alarms, etc.
+29. Optimize and proof check code ~ Make it VERY elgant.
+30. Preformance enhancements, caching etc.
+31. Production Build Test.
+32. Shift to shell.tni
+33. Session sharing managed by shell.tni server.
