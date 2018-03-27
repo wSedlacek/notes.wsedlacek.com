@@ -14,7 +14,6 @@
 <link rel="import" href="../../bower_components/neon-animation/web-animations.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
-
 <link rel="import" href="../elements/framework/action-bar.html">
 <link rel="import" href="../elements/framework/user-manager.html">
 <link rel="import" href="../elements/dialogs/controler.html">
@@ -113,6 +112,8 @@
         super.ready();
         document.dispatchEvent(new CustomEvent('end-splash'));
         document.addEventListener('add-tab', e => this.noNotesOpened = false);
+        document.addEventListener('close-tab', e => this.noNotesOpened = true);
+        document.addEventListener('update-note', e => this.noNotesOpened = false);
       }
 
       static get properties() {

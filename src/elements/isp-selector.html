@@ -12,17 +12,28 @@
       }
     </style>
 
+    <custom-style>
+      <style is="custom-style">
+        paper-tabs[no-bar] paper-tab.iron-selected {
+          color: var(--app-primary-color);
+        }
+        paper-tabs {
+          --paper-tab-ink: var(--app-primary-color);
+          --paper-tabs-selection-bar-color: var(--app-primary-color);
+        }
+      </style>
+    </custom-style>
+
+
     <div class="card">
-      <paper-dropdown-menu always-float-label label="ISP" horizontal-align="center">
-        <paper-tabs slot="dropdown-content" selected={{isp}}>
-          <paper-tab>CenturyLink</paper-tab>
-          <paper-tab>Rise</paper-tab>
-          <paper-tab>Retail</paper-tab>
-          <paper-tab>Texas.gov</paper-tab>
-          <paper-tab>DPS Direct</paper-tab>
-          <paper-tab>Unknown</paper-tab>
-        </paper-tabs>
-      </paper-dropdown-menu>
+      <paper-tabs slot="dropdown-content" selected={{isp}} no-bar>
+        <paper-tab>CenturyLink</paper-tab>
+        <paper-tab>Rise</paper-tab>
+        <paper-tab>Retail</paper-tab>
+        <paper-tab>Texas.gov</paper-tab>
+        <paper-tab>DPS Direct</paper-tab>
+        <paper-tab>Unknown</paper-tab>
+      </paper-tabs>
     </div>
   </template>
 

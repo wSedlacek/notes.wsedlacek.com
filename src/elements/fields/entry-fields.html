@@ -96,6 +96,7 @@
       }
 
       updateFields() {
+        if (this.note == null || this.note == undefined) return -1;
         this.fields.forEach(field => {
           field.ignoreUpdate = true;
           field.entry = this.note[field.id];

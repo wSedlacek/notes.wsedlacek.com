@@ -1,4 +1,5 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/paper-tabs/paper-tabs.html">
 
 <link rel="import" href="../../backend/tabs/tabs.html">
@@ -16,6 +17,22 @@
 
       paper-tabs[no-bar] paper-tab.iron-selected {
         color: #ffff8d;
+      }
+
+      #tab:hover #close-button, #tab.hover #close-button {
+        opacity: 1;
+        transition: all 0.2s linear;
+        -webkit-transition: all 0.2s linear;
+        -o-transition: all 0.2s linear;
+        -moz-transition: all 0.2s linear;
+      }
+
+      #close-button {
+        opacity: 0;
+        padding: 0;
+        height: 20px;
+        width: 20px;
+        margin: 0px 0px 0px 10px;
       }
     </style>
 
@@ -46,12 +63,29 @@
         document.addEventListener('update-tab', e => this.update(e.detail.name));
       }
 
-      add() {
+      add(reference = this) {
         this.$.backend.add();
         var note = this.$.backend.selectedNote;
+
         var tab = document.createElement("paper-tab");
-        var tabTitle = ("Unknown");
-        tab.innerHTML = tabTitle;
+        tab.id ="tab";
+
+        var tabTitle = document.createElement("div");
+        tabTitle.innerHTML = "Unknown";
+
+        var close = document.createElement("paper-icon-button");
+        close.icon = "close";
+        close.id = "close-button";
+        close.onclick = function () {
+          reference.$.tabs.removeChild(reference.$.tabs.children[reference.selected]);
+          reference.notes.splice(reference.selected,1);
+          reference.numTabs--;
+          reference.selected = null;
+          document.dispatchEvent(new CustomEvent('close-tab'));
+        };
+
+        tab.appendChild(tabTitle);
+        tab.appendChild(close);
         this.$.tabs.appendChild(tab);
         this.selected = this.numTabs;
         this.numTabs++;
@@ -64,7 +98,7 @@
       update(name) {
         if (this.$.tabs.children[this.selected] == null) return;
         var tabTitle = (name == "" ? "Unknown" : name).split(" ")[0];
-        this.$.tabs.children[this.selected].innerHTML = tabTitle.slice(0,10);
+        this.$.tabs.children[this.selected].children[0].innerHTML = tabTitle.slice(0,10);
       }
     }
 

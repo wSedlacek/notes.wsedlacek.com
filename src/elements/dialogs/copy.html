@@ -10,10 +10,15 @@
       :host {
         display: block;
       }
+      #spacer {
+        width: 80vh;
+      }
     </style>
     <dialog-template id="dialog" header="Copy notes">
-      <paper-textarea rows=20 always-float-label value="{{string}}" style="width: 80vh;"></paper-textarea>
-      <paper-button raised>Copy</paper-button>
+      <div id="spacer">
+        <paper-textarea rows=20 always-float-label value="{{string}}"></paper-textarea>
+        <paper-button raised>Copy</paper-button>
+      </div>
     </dialog-template>
   </template>
 
@@ -35,8 +40,8 @@
       }
 
       show(entries) {
-        if (entries != null) this.createCopy(entries);
         this.$.dialog.show();
+        if (entries != null) this.createCopy(entries);
       }
 
       hide() {
