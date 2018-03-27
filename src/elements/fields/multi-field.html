@@ -14,7 +14,10 @@
       static get properties() {
         return {
           label: String,
-          entry: String,
+          entry: {
+            type: String,
+            notify: true
+          },
           rows: Number,
           enabled: {
             type: Boolean,
