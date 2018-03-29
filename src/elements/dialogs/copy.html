@@ -51,10 +51,12 @@
       createCopy(entries) {
         this.string = "";
         entries.forEach(field => {
-          if (field.type == "field") {
-            if (field.entry != undefined) this.string += field.pre + field.entry + field.post + "\n";
-          } else if (field.type == "div") {
-            this.string += field.text + "\n";
+          if (field.enabled) {
+            if (field.type == "field") {
+              if (field.entry != undefined && field.entry != "") this.string += field.pre + field.entry + field.post + "\n";
+            } else if (field.type == "div") {
+              this.string += field.text + "\n";
+            }
           }
         });
       }

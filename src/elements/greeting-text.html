@@ -1,16 +1,41 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../styles/shared.html">
 
-<dom-module id="replace-me">
+<dom-module id="greeting-text">
   <template>
+    <style include="shared-styles">
+    .center {
+      text-align: center;
+    }
+    </style>
+
+    <div class="card center">
+      {{greeting}}
+    </div>
   </template>
 
   <script>
-    class ReplaceMe extends Polymer.Element {
+    class GreetingText extends Polymer.Element {
       static get is() {
-        return 'replace-me';
+        return 'greeting-text';
       }
+
+      static get properties() {
+        return {
+          greeting: String,
+          isp: {
+            type: Object,
+            observer: "updateGreeting"
+          }
+        };
+      }
+
+      updateGreeting(isp) {
+        this.greeting = isp.greeting;
+      }
+
     }
 
-    window.customElements.define(ReplaceMe.is, ReplaceMe);
+    window.customElements.define(GreetingText.is, GreetingText);
   </script>
 </dom-module>

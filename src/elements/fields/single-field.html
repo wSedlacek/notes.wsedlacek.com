@@ -20,6 +20,7 @@
           },
           enabled: {
             type: Boolean,
+            value: true,
             observer: "_updateVisiblity"
           },
           ingoreUpdate: Boolean,
@@ -28,17 +29,17 @@
         };
       }
 
-      _updateVisiblity() {
-        if (enabled) this.enable();
-        else this.disable();
+      _updateVisiblity(enabled) {
+        if (enabled) this.$.field.setAttribute('style', '');
+        else this.$.field.setAttribute('style', 'display: none');
       }
 
       enable() {
-        this.$.fieldsetAttribute('style', '');
+        this.enabled = true;
       }
 
       disable() {
-        this.$.fieldsetAttribute('style', 'display: none');
+        this.enabled = false;
       }
     }
 

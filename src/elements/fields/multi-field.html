@@ -21,6 +21,7 @@
           rows: Number,
           enabled: {
             type: Boolean,
+            value: true,
             observer: "_updateVisiblity"
           },
           ingoreUpdate: Boolean,
@@ -29,9 +30,9 @@
         };
       }
 
-      _updateVisiblity() {
-        if (enabled) this.$.fieldsetAttribute('style', '');
-        else this.$.fieldsetAttribute('style', 'display: none');
+      _updateVisiblity(enabled) {
+        if (enabled) this.$.field.setAttribute('style', '');
+        else this.$.field.setAttribute('style', 'display: none');
       }
 
       enable() {

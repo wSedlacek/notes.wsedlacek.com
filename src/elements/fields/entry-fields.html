@@ -3,8 +3,10 @@
 <link rel="import" href="../../backend/notes/note.html">
 <link rel="import" href="../../styles/shared.html">
 
+<link rel="import" href="div-field.html">
 <link rel="import" href="single-field.html">
 <link rel="import" href="multi-field.html">
+
 <dom-module id="entry-fields">
   <template>
     <style include="shared-styles"></style>
@@ -48,10 +50,15 @@
           },
           note: {
             type: Object,
-            notify: true,
             observer: "updateFields"
           }
         };
+      }
+
+      static get observers() {
+        return [
+          'enableCorrectFieldsFields(note.isp)',
+        ];
       }
 
       ready() {
@@ -70,7 +77,6 @@
         field.label = entry.label;
         field.pre = entry.pre;
         field.post = entry.post;
-        field.entry = this.note[field.id];
         if (entry.rows > 1) field.rows = entry.rows;
         field.addEventListener("entry-changed", function () {
           reference.set('note.' + field.id, field.entry);
@@ -101,6 +107,7 @@
           field.ignoreUpdate = true;
           field.entry = this.note[field.id];
         });
+        this.enableCorrectFieldsFields();
       }
 
       enableAllFields() {
@@ -109,7 +116,10 @@
         });
       }
 
-      disableUnrelatedFields(isp) {
+      enableCorrectFieldsFields(isp) {
+        if (isp == undefined || isp == null) return;
+        this.enableAllFields();
+
         var listToDisable = [];
 
         this.fields.forEach(field => {
@@ -117,8 +127,8 @@
         });
 
         listToDisable.forEach(field => {
-          field.value = "";
-          field.setAttribute('style', 'display: none');
+          field.entry = "";
+          field.disable();
         });
       }
     }

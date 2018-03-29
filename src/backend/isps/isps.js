@@ -3,13 +3,13 @@ var ispsJSON = {
     "id": "1",
     "name": "Generic ISP",
     "greeting": "Hello my name is...",
-    "fields": "btn,ban",
+    "fields": "noc,noa,btn,ban,rx",
     "color": "blue"
   }, {
     "id": "2",
     "name": "Generic ISP 2",
-    "greeting": "Hello my name is...",
-    "fields": "btn,ban",
+    "greeting": "Hello my name is... 2",
+    "fields": "info,btn,ban",
     "color": "blue"
   }]
 }

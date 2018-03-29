@@ -29,7 +29,7 @@
 
     <div class="card">
       <backend-isps isps="{{isps}}"></backend-isps>
-      <paper-tabs id="tabs" slot="dropdown-content" selected={{isp}} no-bar>
+      <paper-tabs id="tabs" slot="dropdown-content" selected={{selected}} no-bar>
       </paper-tabs>
     </div>
   </template>
@@ -42,15 +42,19 @@
 
       static get properties() {
         return {
-          isp: {
+          selected: {
             type: Number,
+            notify: true,
+            observer: 'changeISP'
+          },
+          isp: {
+            type: Object,
             notify: true
           },
           isps: {
             type: Array,
             notify: true
-          },
-          selected: Object
+          }
         };
       }
 
@@ -73,12 +77,15 @@
             tab.innerHTML = isp.name;
             tab.id = isp.id;
             this.$.tabs.appendChild(tab);
-            this.isp = isps.length - 1;
+            this.selected = isps.length - 1;
           }
         });
-
-
       }
+
+      changeISP(selected) {
+        this.isp = this.isps[selected];
+      }
+
     }
 
     window.customElements.define(ISPSelector.is, ISPSelector);

@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../styles/shared.html">
 
+<link rel="import" href="../elements/greeting-text.html">
 <link rel="import" href="../elements/isp-selector.html">
 <link rel="import" href="../elements/fields/entry-fields.html">
 <link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
@@ -28,13 +29,10 @@
       }
     </style>
 
-    <isp-selector isp="{{isp}}"></isp-selector>
+    <isp-selector id="ispselect" isp="{{isp}}"></isp-selector>
+    <greeting-text id="greeting" isp="{{isp}}"></greeting-text>
+    <entry-fields id="fields" note={{note}}></entry-fields>
 
-    <div class="card">
-      <p id="greeting">{{greeting}}</p>
-    </div>
-
-    <entry-fields fields={{entries}} note={{note}}></entry-fields>
     <paper-fab id="copy" icon="content-copy" on-tap="showCopy"></paper-fab>
     <paper-fab id="callback" icon="alarm" on-tap=""></paper-fab>
   </template>
@@ -45,85 +43,44 @@
         return 'note-gen';
       }
 
-      ready() {
-        super.ready();
-        document.addEventListener('update-note', e => this.updateNote(e.detail.note));
-      }
-
-      updateNote(note) {
-        this.note = note;
-      }
-
       static get properties() {
         return {
           isp: {
-            type: Number,
-            value: 5,
-            observer: 'changeGreeting'
-          },
-          isps: {
             type: Object,
-            value: function () {
-              return {
-                cl: 0,
-                rise: 1,
-                retail: 2,
-                txo: 3,
-                dps: 4,
-                unknown: 5
-              }
-            }
+            observer: 'changeISP'
           },
-          greeting: String,
-          greetings: {
-            type: Object,
-            value: function () {
-              return {
-                cl: "",
-                rise: "Thank you for calling OneSupport, this is <First-Name> speaking. Can I get your first and last name? ... What can I help you with today?",
-                retail: "",
-                txo: "",
-                dps: "",
-                unknown: "Thank you for calling Technical Support this is <First-Name> speaking. Can I get...<see-feilds>"
-              }
-            }
-          },
-          entries: Object,
           note: {
             type: Object,
-            notify: true
-          }
+            observer: 'updateISP'
+          },
         };
+      }
+
+      ready() {
+        super.ready();
+        document.addEventListener('update-note', e => this.note = e.detail.note);
       }
 
       showCopy() {
         document.dispatchEvent(new CustomEvent('show-dialog-copy', {
           detail: {
-            entries: this.entries
+            entries: this.$.fields.fields
           }
         }));
       }
 
-      changeGreeting() {
-        switch (this.isp) {
-          case this.isps.cl:
-            this.greeting = this.greetings.cl;
-            break;
-          case this.isps.rise:
-            this.greeting = this.greetings.rise;
-            break;
-          case this.isps.retail:
-            this.greeting = this.greetings.retail;
-            break;
-          case this.isps.txo:
-            this.greeting = this.greetings.txo;
-            break;
-          case this.isps.dps:
-            this.greeting = this.greetings.dps;
-            break;
-          case this.isps.unknown:
-            this.greeting = this.greetings.unknown;
-            break;
+      changeISP(isp) {
+        if (this.note == undefined) return -1;
+        this.set('note.isp', isp);
+      }
+
+      updateISP(note) {
+        if (this.note == undefined || this.note == null) return -1;
+        if (this.note.isp == undefined || this.note.isp == null) {
+          this.$.ispselect.selected = this.$.ispselect.isps.length - 1;
+          this.set('note.isp', this.$.ispselect.isp);
+        } else {
+          this.$.ispselect.selected = this.$.ispselect.isps.indexOf(note.isp);
         }
       }
     }

@@ -9,11 +9,23 @@
       static get is() {
         return 'div-field';
       }
+
       static get properties() {
         return {
           text: String,
-          enabled: Boolean
+          enabled: {
+            type: Boolean,
+            value: true
+          }
         };
+      }
+
+      enable() {
+        this.enabled = true;
+      }
+
+      disable() {
+        this.enabled = false;
       }
     }
 
