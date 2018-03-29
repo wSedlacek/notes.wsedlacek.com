@@ -38,6 +38,9 @@ Algin Tab Close Buttons Automatically.
 Drag to rearrage tabs.
 Fix page highlight when no notes are open.
 Rebase so can be publised to github safely.
+Errors and text valdition for fields.
+Move json elements to proper json files.
+Make elements more reusable and versitile.
 1b. Sales Dialog.
 2. Linked Entries
 3. Entries Formating (Side by Side)
