@@ -1,15 +1,15 @@
 var ispsJSON = {
   "isps": [{
-    "id": "1",
-    "name": "Generic ISP",
-    "greeting": "Hello my name is...",
-    "fields": "noc,noa,btn,ban,rx",
+    "id": "some",
+    "name": "Some ISP",
+    "greeting": "Thank you for calling this ISP. We this is just an example of what a greeting could be... Please give me your...",
+    "fields": "info,noc,noa,btn,ban,rx",
     "color": "blue"
   }, {
-    "id": "2",
-    "name": "Generic ISP 2",
+    "id": "another",
+    "name": "Another ISP",
     "greeting": "",
-    "fields": "info,btn,ban",
+    "fields": "info,noc,btn,ban,problem,resolution",
     "color": "blue"
   }]
 }
