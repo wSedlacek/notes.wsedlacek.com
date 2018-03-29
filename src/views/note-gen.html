@@ -47,7 +47,6 @@
 
       ready() {
         super.ready();
-        this.changeGreeting();
         document.addEventListener('update-note', e => this.updateNote(e.detail.note));
       }
 
@@ -59,7 +58,8 @@
         return {
           isp: {
             type: Number,
-            value: 5
+            value: 5,
+            observer: 'changeGreeting'
           },
           isps: {
             type: Object,
@@ -80,8 +80,8 @@
             value: function () {
               return {
                 cl: "",
-                rise: "",
-                retail: "Thank you for calling OneSupport, this is <First-Name> speaking. Can I get your first and last name? ... What can I help you with today?",
+                rise: "Thank you for calling OneSupport, this is <First-Name> speaking. Can I get your first and last name? ... What can I help you with today?",
+                retail: "",
                 txo: "",
                 dps: "",
                 unknown: "Thank you for calling Technical Support this is <First-Name> speaking. Can I get...<see-feilds>"

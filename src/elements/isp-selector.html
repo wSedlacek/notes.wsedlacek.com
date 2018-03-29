@@ -4,6 +4,8 @@
 
 <link rel="import" href="../styles/shared.html">
 
+<link rel="import" href="../backend/isps/isps.html">
+
 <dom-module id="isp-selector">
   <template>
     <style include="shared-styles">
@@ -26,13 +28,8 @@
 
 
     <div class="card">
-      <paper-tabs slot="dropdown-content" selected={{isp}} no-bar>
-        <paper-tab>CenturyLink</paper-tab>
-        <paper-tab>Rise</paper-tab>
-        <paper-tab>Retail</paper-tab>
-        <paper-tab>Texas.gov</paper-tab>
-        <paper-tab>DPS Direct</paper-tab>
-        <paper-tab>Unknown</paper-tab>
+      <backend-isps isps="{{isps}}"></backend-isps>
+      <paper-tabs id="tabs" slot="dropdown-content" selected={{isp}} no-bar>
       </paper-tabs>
     </div>
   </template>
@@ -49,7 +46,38 @@
             type: Number,
             notify: true
           },
+          isps: {
+            type: Array,
+            notify: true
+          },
+          selected: Object
         };
+      }
+
+      static get observers() {
+        return [
+          'add(isps)',
+        ];
+      }
+
+      add(isps) {
+        var newISPs = [];
+        isps.forEach(isp => {
+          var newISP = true;
+          var children = [].slice.call(this.$.tabs.children);
+          children.forEach(tab => {
+            if (tab.id == isp.id) newISP = false;
+          });
+          if (newISP) {
+            var tab = document.createElement("paper-tab");
+            tab.innerHTML = isp.name;
+            tab.id = isp.id;
+            this.$.tabs.appendChild(tab);
+            this.isp = isps.length - 1;
+          }
+        });
+
+
       }
     }
 

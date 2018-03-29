@@ -1,18 +1,51 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="backend-isp">
+<link rel="import" href="isp.html">
+
+<dom-module id="backend-isps">
   <template>
-    <backend-isp name="CenturyLink @ease" greeting="" disabledFields="" color=""></backend-isp>
-    <backend-isp name="OneSupport Retail" greeting="" disabledFields="" color=""></backend-isp>
-    <backend-isp name="Rise PTS" greeting="" disabledFields="" color=""></backend-isp>
-    <backend-isp name="Texas.gov" greeting="" disabledFields="" color=""></backend-isp>
-    <backend-isp name="DPS Direct" greeting="" disabledFields="" color=""></backend-isp>
   </template>
 
+  <script src="isps.js"></script>
   <script>
     class BackendIsps extends Polymer.Element {
       static get is() {
-        return 'backend-isp';
+        return 'backend-isps';
+      }
+
+      static get properties() {
+        return {
+          selected: {
+            type: Number,
+            notify: true
+          },
+          isps: {
+            type: Array,
+            notify: true,
+            value: function () {
+              return []
+            }
+          },
+        };
+      }
+
+      ready() {
+        super.ready();
+
+        ispsJSON.isps.forEach(isp => {
+          this.add(isp);
+        });
+      }
+
+      add(incomming) {
+        var isp = document.createElement("backend-isp");
+        isp.id = incomming.id;
+        isp.name = incomming.name;
+        isp.greeting = incomming.greeting;
+        isp.fields = incomming.fields;
+        isp.color = incomming.color;
+        this.push('isps', isp);
+        this.selected = this.isps.length - 1;
       }
     }
 

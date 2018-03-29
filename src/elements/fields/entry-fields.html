@@ -57,7 +57,7 @@
       ready() {
         super.ready();
 
-        json.entries.forEach(entry => {
+        fieldsJSON.entries.forEach(entry => {
           if (entry.type == "field") this.createField(entry)
           else if (entry.type == "div") this.createDiv(entry);
         });

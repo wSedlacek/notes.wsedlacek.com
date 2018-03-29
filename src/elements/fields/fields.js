@@ -1,4 +1,4 @@
-var json = {
+var fieldsJSON = {
   "entries": [{
     "type": "div",
     "key": "info",
