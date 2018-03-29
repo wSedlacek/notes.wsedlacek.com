@@ -8,7 +8,7 @@ var ispsJSON = {
   }, {
     "id": "2",
     "name": "Generic ISP 2",
-    "greeting": "Hello my name is... 2",
+    "greeting": "",
     "fields": "info,btn,ban",
     "color": "blue"
   }]

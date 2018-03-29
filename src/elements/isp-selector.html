@@ -27,7 +27,7 @@
     </custom-style>
 
 
-    <div class="card">
+    <div id="card" class="card">
       <backend-isps isps="{{isps}}"></backend-isps>
       <paper-tabs id="tabs" slot="dropdown-content" selected={{selected}} no-bar>
       </paper-tabs>
@@ -78,6 +78,7 @@
             tab.id = isp.id;
             this.$.tabs.appendChild(tab);
             this.selected = isps.length - 1;
+            this.$.card.setAttribute('style', isps.length > 1 ? '' : 'display: none');
           }
         });
       }

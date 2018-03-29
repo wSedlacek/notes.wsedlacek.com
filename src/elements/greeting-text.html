@@ -9,7 +9,7 @@
     }
     </style>
 
-    <div class="card center">
+    <div id="card" class="card center">
       {{greeting}}
     </div>
   </template>
@@ -32,6 +32,7 @@
 
       updateGreeting(isp) {
         this.greeting = isp.greeting;
+        this.$.card.setAttribute('style', this.greeting == "" || this.greeting == undefined ? 'display: none' : '');
       }
 
     }
