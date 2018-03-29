@@ -16,14 +16,31 @@ Using the polymer framework makes this project get a lot of free styling and mak
 1. Dialogs
 1a. Note Coping Dialog.
 6. Deleting Tabs.
-
-TODO:
-1b. Sales Dialog.
-2. Linked Entries
-3. Entries Formating (Side by Side)
 4. ISPs by JSON
 4a. ISP Selector
 5. Greetings.
+
+TODO:
+Move FAB Buttons
+CB Manager
+Clear Note Button
+Clear Field Button
+Field Buttons
+More Field Types (Dropdowns, Tabs, etc.)
+Format Side Bar like GDrive
+Cleanup views
+Shift Static Elements to Static Folder.
+ISP Selector Icons and Color Support
+ISP Selector GUI format changes for better support of many ISPs with multiline support
+Import Text.
+Drag File/Text in proper format to import.
+Algin Tab Close Buttons Automatically.
+Drag to rearrage tabs.
+Fix page highlight when no notes are open.
+Rebase so can be publised to github safely.
+1b. Sales Dialog.
+2. Linked Entries
+3. Entries Formating (Side by Side)
 7. Common Issues.
 8. Local Storage.
 9. Saving Notes.
@@ -41,7 +58,7 @@ TODO:
 21. User Preferences.
 22. QR Code for sessions.
 23. Cleanup.
-24. UI Improvements.
+24. GUI Improvements and tweaks.
 25. Feedback and Bug Fixes.
 26. Callback Timers.
 27. Multible field types for Dropdowns, Radio, Etc.
