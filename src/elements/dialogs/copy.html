@@ -12,12 +12,13 @@
       }
       #spacer {
         width: 80vh;
+        max-width: 100%;
       }
     </style>
     <dialog-template id="dialog" header="Copy notes">
       <div id="spacer">
-        <paper-textarea rows=20 always-float-label value="{{string}}"></paper-textarea>
-        <paper-button raised>Copy</paper-button>
+        <paper-textarea id="text" rows=20 always-float-label value="{{string}}"></paper-textarea>
+        <paper-button raised on-click="copyText">Copy</paper-button>
       </div>
     </dialog-template>
   </template>
@@ -46,6 +47,12 @@
 
       hide() {
         this.$.dialog.hide();
+      }
+
+      copyText() {
+        this.$.text.focus();
+        document.execCommand('selectAll');
+        document.execCommand('copy');
       }
 
       createCopy(entries) {
