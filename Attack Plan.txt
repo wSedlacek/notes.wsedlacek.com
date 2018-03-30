@@ -41,6 +41,7 @@ Rebase so can be publised to github safely.
 Errors and text valdition for fields.
 Move json elements to proper json files.
 Make elements more reusable and versitile.
+Monospaced fonts for the copying of notes, troubleshooting, and todo
 1b. Sales Dialog.
 2. Linked Entries
 3. Entries Formating (Side by Side)
