@@ -143,8 +143,6 @@
       }
 
       _routePageChanged(page, noNotesOpened) {
-        // If no page was found in the route data, page will be an empty string.
-        // Default to 'note-gen' in that case.
         this.page = noNotesOpened && (page == 'note-gen' || page == '') ? 'note-empty' : page == '' ? 'note-gen' : page;
 
         // Close a non-persistent drawer when the page & route are changed.
