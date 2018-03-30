@@ -19,6 +19,7 @@ Using the polymer framework makes this project get a lot of free styling and mak
 4. ISPs by JSON
 4a. ISP Selector
 5. Greetings.
+14. Open PTS/TXO to Save Notes.
 
 TODO:
 Move FAB Buttons
@@ -52,7 +53,6 @@ Monospaced fonts for the copying of notes, troubleshooting, and todo
 11. List Saved Notes.
 12. Lookup in PTS.
 13. Lookup in TXO.
-14. Open PTS/TXO to Save Notes.
 15. LMIR PIN Gen.
 16. VTR PIN Gen.
 17. Auto Wiki Search

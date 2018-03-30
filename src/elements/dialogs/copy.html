@@ -22,8 +22,8 @@
       <div id="spacer">
         <paper-textarea id="text" rows="[[calcRows(width,height)]]" max-rows="[[calcRows(width,height)]]" always-float-label value="{{string}}"></paper-textarea>
         <paper-button raised on-click="copyText">Copy</paper-button>
-        <paper-button raised on-click="">Copy to TXO</paper-button>
-        <paper-button raised on-click="">Copy to PTS</paper-button>
+        <paper-button raised on-click="copyTXO">Copy to TXO</paper-button>
+        <paper-button raised on-click="copyPTS">Copy to PTS</paper-button>
       </div>
     </dialog-template>
   </template>
@@ -52,6 +52,7 @@
 
       static get properties() {
         return {
+          entries: Object,
           string: String,
           width: Number,
           height: Number
@@ -69,20 +70,50 @@
           return;
         }
 
-        var w_limit = Math.round(width/10);
-        var h_limit = Math.round((hieght - 120)/50);
+        var w_limit = Math.round(width / 10);
+        var h_limit = Math.round((hieght - 120) / 50);
         var limit = w_limit > h_limit ? h_limit : w_limit;
-        console.log(w_limit + ", " + h_limit + " = " + limit);
         return limit;
       }
 
       show(entries) {
         this.$.dialog.show();
-        if (entries != null) this.createCopy(entries);
+        if (entries != null) {
+          this.entries = entries;
+          this.entriesToString();
+        }
       }
 
       hide() {
         this.$.dialog.hide();
+      }
+
+      copyTXO() {
+        this.copyText();
+        var noc = this.getEntryByID("noc").entry;
+        if (noc == undefined) {
+          noc = "";
+          f_noc = "";
+          l_noc = "";
+        }
+        else {
+          var f_noc = noc.split(' ').slice(0, -1).join(' ');
+          var l_noc = noc.split(' ').slice(-1).join(' ');
+        }
+        var btn = this.getEntryByID("btn").entry;
+        if (btn == undefined) btn = "";
+        var link = "https://tracker.telenetwork.com/txotracker/#/?sfirstname=" + f_noc + "&slastname=" + l_noc + "&scontactnumber=" + btn;
+        var win = window.open(link, '_blank');
+        win.focus();
+      }
+
+      copyPTS() {
+        this.copyText();
+        var btn = this.getEntryByID("btn").entry;
+        if (btn == undefined) btn = "";
+        var link = "https://tracker.telenetwork.com/PTS_Tracker/#/Search/" + btn;
+        var win = window.open(link, '_blank');
+        win.focus();
       }
 
       copyText() {
@@ -91,9 +122,9 @@
         document.execCommand('copy');
       }
 
-      createCopy(entries) {
+      entriesToString() {
         this.string = "";
-        entries.forEach(field => {
+        this.entries.forEach(field => {
           if (field.enabled) {
             if (field.type == "field") {
               if (field.entry != undefined && field.entry != "") this.string += field.pre + field.entry + field
@@ -103,6 +134,19 @@
             }
           }
         });
+      }
+
+      getEntryByID(id) {
+        var fetch;
+        this.entries.forEach(field => {
+          if (field.enabled) {
+            if (field.id == id) {
+              fetch = field;
+            }
+          }
+        });
+
+        return fetch;
       }
 
     }
