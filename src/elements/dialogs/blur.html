@@ -18,21 +18,30 @@
             type: Boolean,
             value: false,
             observer: '_blurBackground'
-          }
+          },
+          overlay: Object
         };
       }
 
-      _blurBackground(enabled) {
+      ready() {
+        super.ready();
+        this._getOverlay();
+      }
 
-        var overlay = this;
+      _getOverlay() {
+        this.overlay = this;
+        var count = 0;
 
         do {
-          overlay = overlay.getRootNode().host;
-        } while (!overlay.classList.contains("controler"));
-        overlay = overlay.getRootNode().querySelector(".blurable");
+          if (count++ > 5) { this.overlay = null; return -1;}
+          this.overlay = this.overlay.getRootNode().host;
+        } while (!this.overlay.classList.contains("controler"));
+        this.overlay = this.overlay.getRootNode().querySelector(".blurable");
+      }
 
-        if (overlay == null) { console.log("NO BLUR"); return; }
-        overlay.classList == undefined ? console.log("NO BLUR") : enabled ? overlay.classList.add('blur') : overlay.classList.remove('blur');
+      _blurBackground(enabled) {
+        if (this.overlay == null || this.overlay == undefined) return;
+        this.overlay.classList == undefined ? console.log("NO BLUR") : enabled ? this.overlay.classList.add('blur') : this.overlay.classList.remove('blur');
       }
     }
 
