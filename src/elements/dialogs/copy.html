@@ -7,18 +7,23 @@
 <dom-module id="dialog-copy">
   <template>
     <style>
-      :host {
-        display: block;
-      }
       #spacer {
         width: 80vh;
         max-width: 100%;
+        max-height: 100%;
+        display: inline-block;
+      }
+
+      paper-button {
+        float: right;
       }
     </style>
     <dialog-template id="dialog" header="Copy notes">
       <div id="spacer">
-        <paper-textarea id="text" rows=20 always-float-label value="{{string}}"></paper-textarea>
+        <paper-textarea id="text" rows="[[calcRows(width,height)]]" max-rows="[[calcRows(width,height)]]" always-float-label value="{{string}}"></paper-textarea>
         <paper-button raised on-click="copyText">Copy</paper-button>
+        <paper-button raised on-click="">Copy to TXO</paper-button>
+        <paper-button raised on-click="">Copy to PTS</paper-button>
       </div>
     </dialog-template>
   </template>
@@ -29,15 +34,46 @@
         return 'dialog-copy';
       }
 
-      ready() {
+      ready(reference = this) {
         super.ready();
         document.addEventListener('show-dialog-copy', e => this.show(e.detail.entries));
+
+        window.onresize = function () {
+          reference.width = window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+          reference.height = window.innerHeight ||
+            document.documentElement.clientHeight ||
+            document.body.clientHeight;
+        };
+
+        this.calcRows();
       }
 
       static get properties() {
         return {
-          string: String
+          string: String,
+          width: Number,
+          height: Number
         };
+      }
+
+      calcRows(width, hieght) {
+        if (width == undefined || hieght == undefined) {
+          this.width = window.innerWidth ||
+            document.documentElement.clientWidth ||
+            document.body.clientWidth;
+          this.height = window.innerHeight ||
+            document.documentElement.clientHeight ||
+            document.body.clientHeight;
+          return;
+        }
+
+        var w_limit = Math.round(width/10);
+        var h_limit = Math.round((hieght - 120)/50);
+        var limit = w_limit > h_limit ? h_limit : w_limit;
+        console.log(w_limit + ", " + h_limit + " = " + limit);
+        return limit;
       }
 
       show(entries) {
@@ -60,7 +96,8 @@
         entries.forEach(field => {
           if (field.enabled) {
             if (field.type == "field") {
-              if (field.entry != undefined && field.entry != "") this.string += field.pre + field.entry + field.post + "\n";
+              if (field.entry != undefined && field.entry != "") this.string += field.pre + field.entry + field
+                .post + "\n";
             } else if (field.type == "div") {
               this.string += field.text + "\n";
             }
