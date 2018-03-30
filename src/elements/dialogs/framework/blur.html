@@ -1,0 +1,50 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="dialog-blur">
+  <template>
+
+  </template>
+
+  <script>
+    class DialogBlur extends Polymer.Element {
+
+      static get is() {
+        return 'dialog-blur';
+      }
+
+      static get properties() {
+        return {
+          enabled: {
+            type: Boolean,
+            value: false,
+            observer: '_blurBackground'
+          },
+          overlay: Object
+        };
+      }
+
+      ready() {
+        super.ready();
+        this._getOverlay();
+      }
+
+      _getOverlay() {
+        this.overlay = this;
+        var count = 0;
+
+        do {
+          if (count++ > 5) { this.overlay = null; return -1;}
+          this.overlay = this.overlay.getRootNode().host;
+        } while (!this.overlay.classList.contains("controler"));
+        this.overlay = this.overlay.getRootNode().querySelector(".blurable");
+      }
+
+      _blurBackground(enabled) {
+        if (this.overlay == null || this.overlay == undefined) return;
+        this.overlay.classList == undefined ? console.log("NO BLUR") : enabled ? this.overlay.classList.add('blur') : this.overlay.classList.remove('blur');
+      }
+    }
+
+    window.customElements.define(DialogBlur.is, DialogBlur);
+  </script>
+</dom-module>

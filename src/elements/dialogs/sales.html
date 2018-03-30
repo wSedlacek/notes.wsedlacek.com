@@ -1,16 +1,49 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="replace-me">
+<link rel="import" href="framework/dialog.html">
+
+<dom-module id="dialog-sales">
   <template>
+    <style>
+      #spacer {
+        width: 80vh;
+        max-width: 100%;
+        max-height: 100%;
+        display: inline-block;
+      }
+    </style>
+    <dialog-template id="dialog" header="Sales">
+      <div id="spacer">
+      </div>
+    </dialog-template>
   </template>
 
   <script>
-    class ReplaceMe extends Polymer.Element {
+    class DialogSales extends Polymer.Element {
       static get is() {
-        return 'replace-me';
+        return 'dialog-sales';
+      }
+
+      ready(reference = this) {
+        super.ready();
+        document.addEventListener('show-dialog-sales', e => this.show());
+      }
+
+      static get properties() {
+        return {
+          isp: Object
+        };
+      }
+
+      show() {
+        this.$.dialog.show();
+      }
+
+      hide() {
+        this.$.dialog.hide();
       }
     }
 
-    window.customElements.define(ReplaceMe.is, ReplaceMe);
+    window.customElements.define(DialogSales.is, DialogSales);
   </script>
 </dom-module>

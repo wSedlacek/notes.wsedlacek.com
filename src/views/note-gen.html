@@ -27,6 +27,14 @@
         bottom: 75px;
         right: 10px;
       }
+
+      #sales {
+        position: fixed;
+        bottom: 10px;
+        right: 75px;
+        --paper-fab-background: var(--paper-purple-500);
+        --paper-fab-keyboard-focus-background: var(--paper-purple-900);
+      }
     </style>
 
     <isp-selector id="ispselect" isp="{{isp}}"></isp-selector>
@@ -35,6 +43,7 @@
 
     <paper-fab id="copy" icon="content-copy" on-tap="showCopy"></paper-fab>
     <paper-fab id="callback" icon="alarm" on-tap=""></paper-fab>
+    <paper-fab id="sales" icon="shop" on-tap="showSales"></paper-fab>
   </template>
 
   <script>
@@ -65,6 +74,14 @@
         document.dispatchEvent(new CustomEvent('show-dialog-copy', {
           detail: {
             entries: this.$.fields.fields
+          }
+        }));
+      }
+
+      showSales() {
+        document.dispatchEvent(new CustomEvent('show-dialog-sales', {
+          detail: {
+            isp: this.isp
           }
         }));
       }

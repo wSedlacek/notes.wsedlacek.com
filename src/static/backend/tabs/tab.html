@@ -1,0 +1,36 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../notes/note.html">
+
+<dom-module id="backend-tab">
+  <template>
+    <backend-note note="{{note}}"></backend-note>
+  </template>
+
+  <script>
+    class BackendTab extends Polymer.Element {
+      static get is() {
+        return 'backend-tab';
+      }
+
+      static get properties() {
+        return {
+          note: {
+            type: Object,
+            notify: true
+          }
+        };
+      }
+
+      delete() {
+
+      }
+
+      save() {
+
+      }
+    }
+
+    window.customElements.define(BackendTab.is, BackendTab);
+  </script>
+</dom-module>
