@@ -11,5 +11,10 @@
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
     "test:integration": "polymer build # test that psk builds without error with the CLI"
+  },
+  "dependencies": {
+    "flutter": "0.0.5",
+    "polymer": "^0.5.0",
+    "polymer-cli": "^1.6.0"
   }
 }
